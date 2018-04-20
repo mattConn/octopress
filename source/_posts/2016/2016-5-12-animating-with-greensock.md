@@ -7,6 +7,7 @@ description: >-
 robots: none
 published: true
 comments: true
+categories: ['web development']
 ---
 
 <i>Originally written for <a href="https://thecharlesnyc.com/unordered-list/green-sock" target="_blank">The Charles NYC</a>.</i>

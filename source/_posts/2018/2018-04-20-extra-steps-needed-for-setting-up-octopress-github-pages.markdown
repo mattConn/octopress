@@ -3,7 +3,7 @@ layout: post
 title: "Extra Steps Needed for Setting Up Octopress with GitHub Pages"
 date: 2018-04-20 00:51:16 -0400
 comments: true
-categories: 
+categories: ['web development']
 ---
 
 Having to set up Octopress to use with GitHub pages again, I realized there are a few extra steps I needed to perform that weren't in the <a href="http://octopress.org/docs/">default instructions</a> on the octopress website:

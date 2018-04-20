@@ -5,6 +5,7 @@ description: A breakdown of my current web development setup on my Samsung Chrom
 robots: none
 published: true
 comments: true
+categories: ['web development', 'linux']
 ---
 ## Quick Rundown
 - **Machine:**

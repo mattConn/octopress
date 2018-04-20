@@ -3,7 +3,7 @@ layout: post
 title: "Hosting Git Repos With a Web Frontend"
 date: 2017-08-02 00:21:17 -0400
 comments: true
-categories: 
+categories: ['web development']
 ---
 
 Hosting your git repositories yourself is as simple as `git init --bare` (or `git clone --bare` for existing repos) in a directory on your server, and then adding the remote to your local repo: `git remote add myServer ssh://me@server.address/path/to/repo/project.git`.

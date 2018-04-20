@@ -5,6 +5,7 @@ description: Enable in-line PHP parsing with Nginx; code snippets included.
 robots: none
 comments: true
 published: true
+categories: ['web development']
 ---
 
 ### My Environment  

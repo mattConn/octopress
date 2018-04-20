@@ -7,6 +7,7 @@ description: >-
 robots: none
 comments: true
 published: true
+categories: ['web development', 'game development']
 ---
 <style>
     .room-array {

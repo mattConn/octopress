@@ -5,6 +5,7 @@ description: How I finally got to use my Chromebook as a full-featured Linux mac
 robots: none
 comments: true
 published: true
+categories: ['linux']
 ---
 
 I love my Chromebook (as evidenced in [this](http://{{ site.noita.domain }}/blog/2016/chromebook-web-development/) post); I bring it everywhere as it comes in handy for long commutes and, weighing in at around 3 pounds, isn't the least bit cumbersome.  
