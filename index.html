@@ -9,7 +9,7 @@
   <meta name="author" content="Matthew Connelly">
 
   
-  <meta name="description" content=" Blog Archives Recent Posts ">
+  <meta name="description" content="If you are familiar with roguelikes (turn-based dungeon crawlers) such as Nethack, then you are no doubt familiar with the idea of a game&rsquo;s &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,533 @@
       <div class="blog-index">
   
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/04/07/text-based-level-editing-phaser-js/">Game Development - Text-based Level Editing and Phaser JS</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-04-07T00:00:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+
+<p>If you are familiar with roguelikes (turn-based dungeon crawlers) such as Nethack, then you are no doubt familiar with the idea of a game&rsquo;s elements being displayed entirely as ASCII characters.</p>
+
+<p>Here I will explain how I use a similar approach to create the layout of rooms in a game I am working on and how I use Phaser (JS game engine) to render the rooms based on my layouts.</p>
+
+<p>The following array of strings represents a single room:</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight room-array">
+<code class="room-array">
+   [
+    //1         12             25
+    'ppppppppppppppppppppppppp',//1
+    'p------------------------',//2
+    'p------------------------',//3
+    'pppppppppp---------------',//4
+    'p----------------E-------',//5
+    'p--------------pppppppppp',//6
+    'p------------------------',//7
+    'p------E-E---------------',//8
+    'pppppppppp---------------',//9
+    'p------------------------',//10
+    'p----------------E-E-E---',//11
+    'p--------------pppppppppp',//12
+    'p-----------------------p',//13
+    'p-----------------------p',//14
+    'p-----------ppppppppppppp',//15
+    'p---------ppppppppppppppp',//16
+    'p------pppppppppppppppppp',//17
+    'ppppppppppppppppppppppppp',//18
+    'ppppppppppppppppppppppppp' //19
+    ]
+</code>
+</pre>
+</div>
+
+
+<p>&ldquo;E&rdquo; represents an enemy, and &ldquo;p&rdquo; represents an immovable block that can be used as a platform or wall. A dash represents empty space, simply because I find it easier to read than whitespace, although I am not exactly counting dashes to find any kind of distance.</p>
+
+<p>The commented-out numbers on top and on the right represent columns and rows respectively; I have divided a canvas 800 pixels wide and 600 pixels high into 25-by-19 32-pixel squares.</p>
+
+<h3>How and when a room is rendered</h3>
+
+<ol>
+<li><p>The player collides with the edge of the world (canvas)</p></li>
+<li><p>The player&rsquo;s x-position is then changed to the position of the edge opposite of the collision (right edge collision, player moved to far-left of canvas; left edge collision, player moved to far-right of canvas); this gives the appearance of entering a new room</p></li>
+<li><p>The room is then cleared, using Phaser&rsquo;s <code>sprite.kill()</code> method</p></li>
+<li><p>A variable integer is then increased or decreased by 1 depending on the edge of collision (right, +1; left, -1), and this integer is then used as our room&rsquo;s index in our level array.</p>
+
+<ul>
+<li>So if our current room&rsquo;s index is 0 (the first room in the level array), and the player collides with the right edge of the canvas, our integer increases to 1, and we render the room who&rsquo;s index is 1 (our second room in the level array)</li>
+</ul>
+</li>
+<li><p>After getting the room we want by index, we check each string within the room array; each of these strings can be looked at as a row of things that can be rendered onto the canvas, from the top of the canvas to the bottom.</p></li>
+<li><p>For each row (string) in the room array, we check each character by its index using <code>String.charAt()</code>.</p></li>
+<li><p>Using a switch statement, the character can be matched to a case; if and after being matched, we will call Phaser&rsquo;s <code>group.create()</code> method to render the matched sprite or image.</p></li>
+</ol>
+
+
+<p>So using the room layout above, <code>level1[0][8].charAt(4)</code> would match a case of <code>p</code> in our switch statement:
+    - 0 is the index of the room (it is the only room shown, but typically there would be multiple rooms), 8 is the index of the row, and the 4th character of the 8th row is a <code>p</code>.</p>
+
+<h3>The room-rendering function (abridged)</h3>
+
+<p>(To be called on collision.)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>function renderRoom(room){
+</span><span class='line'>    for(var row in room){
+</span><span class='line'>        for(var column=0; column &lt;=  room[row].length; column++){
+</span><span class='line'>            switch (room[row].charAt(column)){
+</span><span class='line'>                case 'p':
+</span><span class='line'>                    platform = platforms.create(column*32, row*32, 'platform-image');
+</span><span class='line'>                    break;
+</span><span class='line'>            }
+</span><span class='line'>        }
+</span><span class='line'>    }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+This room-rendering function currently only works with one level but should scale to accommodate multiple levels and work similarly if not identically.</p>
+
+<p>The room system works as detailed in pseudo-code below, with each &ldquo;column&rdquo; actually representing a single character in a string:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>level1 [
+</span><span class='line'>  room1 [ 
+</span><span class='line'>      row1 'column1 column2 column3',
+</span><span class='line'>      row2 'column1 column2 column3',
+</span><span class='line'>      row3 'column1 column2 column3'
+</span><span class='line'>  ],
+</span><span class='line'>  room2 [ 
+</span><span class='line'>      row1 'column1 column2 column3',
+</span><span class='line'>      row2 'column1 column2 column3',
+</span><span class='line'>      row3 'column1 column2 column3'
+</span><span class='line'>  ]
+</span><span class='line'>]</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/03/18/chromebook-linux/">Chromebook Linux - From Crouton to GalliumOS</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-03-18T00:00:00-04:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I love my Chromebook (as evidenced in <a href="http:///blog/2016/chromebook-web-development/">this</a> post); I bring it everywhere as it comes in handy for long commutes and, weighing in at around 3 pounds, isn&rsquo;t the least bit cumbersome.</p>
+
+<p>However, the restrictions ChromeOS placed on me had been noticeable since the beginning; and I knew I would be restricted to Chrome Apps, extensions, and Play store applications, but didn&rsquo;t count on how annoying this restriction would wind up being. Fortunately, there were workarounds.</p>
+
+<h2>Crouton: An Early Solution</h2>
+
+<p><a href="https://github.com/dnschneid/crouton">Crouton</a> proved to be very easy to install and useful from the start. By creating a chroot and installing my distro of choice in it, I could run Ubuntu either by switching over to the chroot or accessing it from the Crosh command line.</p>
+
+<p>There was a problem, however; Ubuntu didn&rsquo;t have the greatest driver support for my Chromebook&rsquo;s trackpad and keyboard. So I found myself running Linux programs from the command line that ChromeOS typically wouldn&rsquo;t allow (such as PHP, Python, and naturally, apt-get), but actually working in the ChromeOS environment, as it was just that much more supportive of the machine (Samsung Chromebook 3).</p>
+
+<p>But now if I wanted to play a game in an emulator such as Mupen64plus or WINE, I could not run that from the command line while in ChromeOS; it would throw an error in regards to X-server, forcing me to switch over to the chroot just for one program.</p>
+
+<h2>GalliumOS: My Current (And Best, So Far) Solution</h2>
+
+<p>Finally I thought I would consider <a href="https://galliumos.org/">GalliumOS</a>; a distro made specifically for Chromebooks. I made a ChromeOS recovery image and made a GalliumOS bootable USB and gave it a try.</p>
+
+<p>It worked nicely; it was a complete Linux environment that supported my machine&rsquo;s brightness and volume keys, and with better &ldquo;palm detection&rdquo; (think Macbook trackpads and your resting thumb) out of the box without messing about with Synaptics.</p>
+
+<p>Initially, there was no sound support for my model. This stopped from installing it for a bit, but after trying a few other options, one including running a chroot off an SD card (for extra space for packages; it gets ejected when the machine sleeps unfortunately), I figured I&rsquo;d deal with the sound issue. (At the time, the bug was that no internal sound was supported, but Bluetooth sound was.)</p>
+
+<p>After a full install, made easy thanks to GalliumOS&rsquo;s excellent documentation, and then finally a GalliumOS update, to my surprise, internal audio worked, and so I&rsquo;m now using my Chromebook as I please, with the ability to install my favorite programs such as Visual Studio Code (a program I wanted on my Chromebook from the very start), WINE, and all the rest; with that update came the patch that fixed my model&rsquo;s sound issue.</p>
+
+<p>As I find myself installing and re-installing Linux pretty often, as with the example of setting up chroots mentioned earlier, I began tracking my environment&rsquo;s packages, as well as Visual Studio Code extensions, which you can check out in a repository <a href="https://github.com/mattConn/ubuntu-environment-setup">here</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/01/02/nginx-php-parsing-in-html/">Parsing In-line PHP With Nginx</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-01-02T00:00:00-05:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2017</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>My Environment</h3>
+
+<ul>
+<li>Nginx version
+
+<ul>
+<li>1.10.0</li>
+</ul>
+</li>
+<li>PHP version
+
+<ul>
+<li>7.0</li>
+</ul>
+</li>
+<li>FastCGI processor
+
+<ul>
+<li>php7.0-fpm</li>
+</ul>
+</li>
+<li>Kernel
+
+<ul>
+<li>Ubuntu 16.04</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>The First And More Obvious Step</h2>
+
+<p>To enable parsing of PHP in HTML files, editing a server block&rsquo;s location block to include files with an HTML extension should be sufficient.<br/>
+For example:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># /etc/nginx/sites-available/mywebsite.com
+</span><span class='line'>location ~ \.(php|html)$ {
+</span><span class='line'>        include snippets/fastcgi-php.conf;
+</span><span class='line'>        fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>However, since I am working with PHP 7, whose full name is &ldquo;php7.0&rdquo; (which is usefully descriptive but makes things tricky when initially looking for related directories or daemons), I had an extra step in order to make this work. And apparently, all PHP versions, from late php5.* to php7.0, will require this extra step.</p>
+
+<h2>The Final And Not-So-Obvious Step</h2>
+
+<p>You&rsquo;ll now have to edit <code>php-fpm.conf</code>, or preferrably one of its included files; namely, <code>www.conf</code>.<br/>
+For me, <code>php-fpm.conf</code> lives at <code>/etc/php/7.0/</code>, with <code>www.conf</code> in directory <code>pool.d</code>.</p>
+
+<p>The line we are looking for in <code>www.conf</code> (or the line you can add to <code>php-fpm.conf</code> if you want) is <code>security.limit_extensions</code>, which, in conjunction with our Nginx configuration, will permit our specified file types to be parsed as PHP. You may have to uncomment it, and for me it read as such by default:</p>
+
+<p><code>security.limit_extensions = .php .php3 .php4 .php5 .php7</code></p>
+
+<p>Here we can add <code>.html</code> or <code>.htm</code>, or even <code>.js</code> (but then we&rsquo;d have to add <code>.js</code> to our Nginx location block as we did with <code>.html</code> earlier).</p>
+
+<p>Finally, we must now restart the php-fpm daemon, and of course, our Nginx server, for all changes to take effect.</p>
+
+<p>For me, signaling Nginx to reload works:<br/>
+<code>nginx -s reload</code><br/>
+(You will need root permissions for this.)</p>
+
+<p>For php-fpm, I use the service wrapper:<br/>
+<code>service php7.0-fpm restart</code><br/>
+(Root permissions needed again.)</p>
+
+<p>Now you should be all set to write in-line PHP in HTML files, or even JavaScript files, if your heart so desires.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/17/chromebook-web-development/">Chromebook Web Development</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-17T00:00:00-05:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Quick Rundown</h2>
+
+<ul>
+<li><strong>Machine:</strong>
+
+<ul>
+<li>Samsung Chromebook 3</li>
+</ul>
+</li>
+<li><strong>Environment:</strong>
+
+<ul>
+<li>ChromeOS for a GUI and native drivers</li>
+<li>Lubuntu for server-side programs and scripts (treated as headless)</li>
+</ul>
+</li>
+<li><strong>Text Editor/IDE</strong>
+
+<ul>
+<li><a href="https://chrome.google.com/webstore/detail/caret-t/agiednhnlghobdgpgfdnbdaflnngmoij?hl=en">Caret-T</a></li>
+</ul>
+</li>
+</ul>
+
+
+<p>I recently purchased a Samsung Chromebook 3 so I could work on projects during my long commute or at my local coffee shop without worrying about losing or breaking my other more expensive portable machine. It&rsquo;s really nice and light, and with a little configuration, makes for a great portable web development environemnt. After all, ChromeOS is itself a linux distro, but things are a little hidden in this environment as ChromeOS is meant to be easily accessible and to leave the user as little room as possible to screw things up.</p>
+
+<h2>First, Enable Developer Mode</h2>
+
+<p><a href="http://www.howtogeek.com/210817/how-to-enable-developer-mode-on-your-chromebook/">Enabling developer mode</a> is very easy and necessary to get things started. This will allow you to access ChromeOS&rsquo;s native shell, or &ldquo;Crosh&rdquo;, which runs in Chrome as an extension which is really cool; ctrl+alt+t will bring you there. From Crosh, we can then access our typical unix shell by simply typing &ldquo;shell.&rdquo;</p>
+
+<p>But now lets say we want another distro to run along side ChromeOS?</p>
+
+<h2>Creating A Chroot For Running Another Distro</h2>
+
+<p>A chroot, or change root, gives us the ability to run this second distro, without partitioning the disk or using a virtual machine, while still being able to access the same files across both environments. I installed LXDE because the Chromebook I purchased had only 2 gigs of RAM, and used <a href="https://github.com/dnschneid/crouton">Crouton</a> to create the chroot.</p>
+
+<p>This second distro is nice because if you are familiar with the Linux environment, you can proceed to work as you normally would, with Aptitude, Python, PHP and everyhing else already installed, and without all the limitations of ChromeOS.</p>
+
+<h2>ChromeOS Is Still Very Nice, And An Integral Part Of This Setup</h2>
+
+<p>ChromeOS makes for a very friendly desktop environment despite the red tape, and handles keyboard and trackpad input with its native drivers; I access the chroot via terminal to run scripts and install programs, but work with the ChromeOS GUI. For a text editor, I use <a href="https://chrome.google.com/webstore/detail/caret-t/agiednhnlghobdgpgfdnbdaflnngmoij?hl=en">Caret-T</a>, which is installed as a Chrome extension, and comes with intellisense-like auto-completion for JavaScript.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/08/28/custom-addthis-setup/">Quick and Custom AddThis Setup</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-08-28T00:00:00-04:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Getting AddThis sharing set up exactly how I wanted took some digging the first time around. Maybe, like me, you wanted AddThis&rsquo;s functionality but with your own styles, and not the AddThis brand buttons. Here&rsquo;s how I set it up, allowing for full customization.</p>
+
+<h2>Considerations</h2>
+
+<p>Before going further, here&rsquo;s a short list of things to consider before working with AddThis:</p>
+
+<p>You should have included AddThis&rsquo;s script before your document&rsquo;s closing body tag.
+AddThis&rsquo;s script will only work remotely; host locally or on a server.
+AddThis links will not work when certain adblock browser extensions are enabled; I&rsquo;ve found adblock plus gave me no problems, but ublock origin did.</p>
+
+<h2>The Code And Setup</h2>
+
+<h3>The HTML:</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;a class="sharing addthis_button_mailto"&gt;mailto&lt;/a&gt;
+</span><span class='line'>&lt;a class="sharing addthis_button_email"&gt;email&lt;/a&gt;
+</span><span class='line'>&lt;a class="sharing addthis_button_tumblr"&gt;tumblr&lt;/a&gt;
+</span><span class='line'>&lt;a class="sharing addthis_button_google"&gt;google&lt;/a&gt;
+</span><span class='line'>&lt;a class="sharing addthis_button_twitter"&gt;twitter&lt;/a&gt;
+</span><span class='line'>&lt;a class="sharing addthis_button_facebook"&gt;facebook&lt;/a&gt;
+</span><span class='line'>&lt;a class="sharing addthis_button_linkedin"&gt;linkedin&lt;/a&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For the HTML, we use anchors each with a class that the AddThis scripts and stylesheets recognize, such as &ldquo;addthis_button_facebook&rdquo;. Sharing will be fully functional when clicking on an anchor with this class for the corresponding platform. Meaning, these classes are required, or at least in this setup.</p>
+
+<p>The first class of &ldquo;sharing&rdquo; is a custom one that I use to denote that these anchors are for AddThis functionality, and to be styled as such. The JavaScript will point to the &ldquo;sharing&rdquo; class as well, but these are not required.</p>
+
+<p>When you first create these anchors with the &ldquo;addthis_button_socialplatform&rdquo; class, AddThis will create a span as well that will contain a small image; I simply style that span with a &ldquo;display: none&rdquo;, and carry on with my own styles.</p>
+
+<h3>The JavaScript:</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var share = document.getElementsByClassName('sharing');
+</span><span class='line'>for(var i=0; i&lt;share.length; i++){
+</span><span class='line'>    share[i].setAttribute('addthis:url',document.URL);
+</span><span class='line'>    share[i].setAttribute('addthis:title',document.title);
+</span><span class='line'>    share[i].setAttribute('addthis:description','Check out my cool post!');
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For the JavaScript, we simply set the attributes of our AddThis anchors (all with the class of &ldquo;sharing&rdquo;) so that when sharing content, they automatically populate any text fields with the appropriate content. There&rsquo;s no need to set an href, as the AddThis script will automatically set it equal to #.</p>
+
+<p>The AddThis anchor attributes are the following:</p>
+
+<p>addthis:url - field will be populated with this url. In this case, I set it equal to our document&rsquo;s url, as I want the shared content to link back to my post or page. Of course, this url can be whatever you want.
+addthis:title - The title that will appear before the description in your shared content.
+addthis:description - this will be the copy that appears below the title in your shared content. This really only applies to platforms like Facebook and LinkedIn that allow for more copy when sharing. There won&rsquo;t be any bugs when this attributed is applied to an anchor where not applicable (such as twitter); the description simply will not appear in that platform&rsquo;s shared content, so there&rsquo;s no need to worry about that.
+How you set any of these attributes is entirely up to you; I use JavaScript because I thought it was the easiest solution and I like JavaScript, but of course you could do it manually. Where you get your &ldquo;addthis:description&rdquo; is up to you as well; maybe an especially important paragraph&rsquo;s innerHTML?</p>
+
+<h3>Considerations For Facebook And Email</h3>
+
+<p>Email (not mailto, but AddThis&rsquo;s email sharing) and Facebook sharing stand out amongst all the other platforms here in that they both require a little extra.</p>
+
+<p>If you change the content you want to share to Facebook and it isn&rsquo;t updating, you&rsquo;ll want to paste the url of the page you&rsquo;re sharing into Facebook&rsquo;s sharing debugger.
+While mailto will open your device&rsquo;s default mail client, then populate the subject based on the mailto attributes, &ldquo;addthis_button_email&rdquo; populates its fields based on the AddThis config variable (seen below).</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var addthis_config = addthis_config||{};
+</span><span class='line'>addthis_config.ui_email_to = 'recipient@email.com';
+</span><span class='line'>addthis_config.ui_email_from = 'sender@email.com';
+</span><span class='line'>addthis_config.ui_email_note = 'The copy that makes up the body of the email.';</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Only one of these will work per page. Also, in case you&rsquo;re familiar with the old AddThis email modal, I feel I should warn you that they&rsquo;ve done away with that and instead AddThis email opens a new window.</p>
+
+<p>Alternatively, you could create an email template in your AddThis dashboard. I&rsquo;ll admit AddThis has good documentation for this.</p>
+
+<p>Finally, you may want to &ldquo;display: none&rdquo; on &ldquo;#at-cv-lightbox&rdquo;; this modal can popup after first visit to a page using AddThis.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/05/12/animating-with-greensock/">Animating With GreenSock</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-05-12T00:00:00-04:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><i>Originally written for <a href="https://thecharlesnyc.com/unordered-list/green-sock" target="_blank">The Charles NYC</a>.</i></p>
+
+<p>I&rsquo;ve recently been introduced to animating with the powerful JavaScript library GreenSock. It’s quite impressive, notably for how manageable its animations are. Unlike CSS3, which measures its animations with percentages, GreenSock uses seconds for timing. GreenSock is also capable of applying multiple animations to a single element, each running either consecutively or simultaneously, which is something CSS3 is not capable of either.</p>
+
+<p>The real beauty of GreenSock is how much control it affords. Much like the animations they control, tweens (the animations between two keyframes) can be controlled with a timeline. This is essentially a container for tweens, and timelines themselves can be nested in other timelines, affording even more control.</p>
+
+<p>After building out a complex sequence of animations, you’ll find GreenSock’s afforded control becomes especially important when changing the animation or timing of your sequence. Whether it be within a single tween or an entire timeline, making changes is easy and painless, and will not affect adjacent animations.</p>
+
+<iframe height='265' scrolling='no' title='Greensock Pacman, Nested Timelines' src='//codepen.io/mattConn/embed/preview/aNZggN/?height=265&theme-id=0&default-tab=css,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/mattConn/pen/aNZggN/'>Greensock Pacman, Nested Timelines</a> by Matthew Connelly (<a href='https://codepen.io/mattConn'>@mattConn</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+
+<p>Using GreenSock, I made a brief animation (above) detailing the interaction between PacMan and a ghost. To create these two characters, I styled and positioned multiple divs, essentially “building” them. To make them “interact,” I placed all of their actions (tweens) into their own respective timelines in order to control the timing of each action.</p>
+
+<p>For example: to animate PacMan biting, there is a rotation tween on PacMan’s upper and lower jaw. These two tweens are both timed to occur simultaneously within a timeline. This timeline, containing all of Pacman’s animations, is then nested in my master timeline. This timeline is then timed to happen first, with my ghost’s timeline timed to happen shortly after.</p>
+
+<p>The learning curve for animating with GreenSock was relatively low with all the available resources online. GreenSock has their own active forum where often the creator of GreenSock himself answers questions in detail with code examples or an occasional proof of concept on Codepen. I’m excited to be working more in-depth with GreenSock in the future. In the absence of Flash, GreenSock seems to be the runner-up as the standard for creating engaging animations on the web.</p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
     <a href="/blog/archives">Blog Archives</a>
@@ -78,6 +605,26 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/04/07/text-based-level-editing-phaser-js/">Game Development - Text-based Level Editing and Phaser JS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/03/18/chromebook-linux/">Chromebook Linux - From Crouton to GalliumOS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/01/02/nginx-php-parsing-in-html/">Parsing In-line PHP With Nginx</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/17/chromebook-web-development/">Chromebook Web Development</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/08/28/custom-addthis-setup/">Quick and Custom AddThis Setup</a>
+      </li>
     
   </ul>
 </section>

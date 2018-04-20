@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Chromebook Web Development - MattConn.io</title>
+  <meta name="author" content="Matthew Connelly">
+
+  
+  <meta name="description" content="A breakdown of my current web development setup on my Samsung Chromebook 3.">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattconn.github.io/blog/2016/12/17/chromebook-web-development/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="MattConn.io" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">MattConn.io</a></h1>
+  
+    <h2>Matthew Connelly's Developer Page</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="mattconn.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Chromebook Web Development</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-17T00:00:00-05:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>Quick Rundown</h2>
+
+<ul>
+<li><strong>Machine:</strong>
+
+<ul>
+<li>Samsung Chromebook 3</li>
+</ul>
+</li>
+<li><strong>Environment:</strong>
+
+<ul>
+<li>ChromeOS for a GUI and native drivers</li>
+<li>Lubuntu for server-side programs and scripts (treated as headless)</li>
+</ul>
+</li>
+<li><strong>Text Editor/IDE</strong>
+
+<ul>
+<li><a href="https://chrome.google.com/webstore/detail/caret-t/agiednhnlghobdgpgfdnbdaflnngmoij?hl=en">Caret-T</a></li>
+</ul>
+</li>
+</ul>
+
+
+<p>I recently purchased a Samsung Chromebook 3 so I could work on projects during my long commute or at my local coffee shop without worrying about losing or breaking my other more expensive portable machine. It&rsquo;s really nice and light, and with a little configuration, makes for a great portable web development environemnt. After all, ChromeOS is itself a linux distro, but things are a little hidden in this environment as ChromeOS is meant to be easily accessible and to leave the user as little room as possible to screw things up.</p>
+
+<h2>First, Enable Developer Mode</h2>
+
+<p><a href="http://www.howtogeek.com/210817/how-to-enable-developer-mode-on-your-chromebook/">Enabling developer mode</a> is very easy and necessary to get things started. This will allow you to access ChromeOS&rsquo;s native shell, or &ldquo;Crosh&rdquo;, which runs in Chrome as an extension which is really cool; ctrl+alt+t will bring you there. From Crosh, we can then access our typical unix shell by simply typing &ldquo;shell.&rdquo;</p>
+
+<p>But now lets say we want another distro to run along side ChromeOS?</p>
+
+<h2>Creating A Chroot For Running Another Distro</h2>
+
+<p>A chroot, or change root, gives us the ability to run this second distro, without partitioning the disk or using a virtual machine, while still being able to access the same files across both environments. I installed LXDE because the Chromebook I purchased had only 2 gigs of RAM, and used <a href="https://github.com/dnschneid/crouton">Crouton</a> to create the chroot.</p>
+
+<p>This second distro is nice because if you are familiar with the Linux environment, you can proceed to work as you normally would, with Aptitude, Python, PHP and everyhing else already installed, and without all the limitations of ChromeOS.</p>
+
+<h2>ChromeOS Is Still Very Nice, And An Integral Part Of This Setup</h2>
+
+<p>ChromeOS makes for a very friendly desktop environment despite the red tape, and handles keyboard and trackpad input with its native drivers; I access the chroot via terminal to run scripts and install programs, but work with the ChromeOS GUI. For a text editor, I use <a href="https://chrome.google.com/webstore/detail/caret-t/agiednhnlghobdgpgfdnbdaflnngmoij?hl=en">Caret-T</a>, which is installed as a Chrome extension, and comes with intellisense-like auto-completion for JavaScript.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matthew Connelly</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-12-17T00:00:00-05:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://mattconn.github.io/blog/2016/12/17/chromebook-web-development/" data-via="" data-counturl="http://mattconn.github.io/blog/2016/12/17/chromebook-web-development/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/08/28/custom-addthis-setup/" title="Previous Post: Quick and Custom AddThis Setup">&laquo; Quick and Custom AddThis Setup</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2017/01/02/nginx-php-parsing-in-html/" title="Next Post: Parsing In-line PHP With Nginx">Parsing In-line PHP With Nginx &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/04/07/text-based-level-editing-phaser-js/">Game Development - Text-based Level Editing and Phaser JS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/03/18/chromebook-linux/">Chromebook Linux - From Crouton to GalliumOS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/01/02/nginx-php-parsing-in-html/">Parsing In-line PHP With Nginx</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/17/chromebook-web-development/">Chromebook Web Development</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/08/28/custom-addthis-setup/">Quick and Custom AddThis Setup</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - Matthew Connelly -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

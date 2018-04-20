@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://mattconn.github.io/blog/2017/04/07/text-based-level-editing-phaser-js/</loc>
+<lastmod>2017-04-07T00:00:00-04:00</lastmod>
+</url>
+<url>
+<loc>http://mattconn.github.io/blog/2017/03/18/chromebook-linux/</loc>
+<lastmod>2017-03-18T00:00:00-04:00</lastmod>
+</url>
+<url>
+<loc>http://mattconn.github.io/blog/2017/01/02/nginx-php-parsing-in-html/</loc>
+<lastmod>2017-01-02T00:00:00-05:00</lastmod>
+</url>
+<url>
+<loc>http://mattconn.github.io/blog/2016/12/17/chromebook-web-development/</loc>
+<lastmod>2016-12-17T00:00:00-05:00</lastmod>
+</url>
+<url>
+<loc>http://mattconn.github.io/blog/2016/08/28/custom-addthis-setup/</loc>
+<lastmod>2016-08-28T00:00:00-04:00</lastmod>
+</url>
+<url>
+<loc>http://mattconn.github.io/blog/2016/05/12/animating-with-greensock/</loc>
+<lastmod>2016-05-12T00:00:00-04:00</lastmod>
+</url>
+<url>
 <loc>http://mattconn.github.io/</loc>
 </url>
 <url>
