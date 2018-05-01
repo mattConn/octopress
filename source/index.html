@@ -25,10 +25,5 @@ layout: default
     {% include_array blog_index_asides %}
   {% else %}
     {% include_array default_asides %}
-
-	<section>
-		<h1>Categories</h1>
-		{% category_list [counter:true] %}
-	</section>
   {% endif %}
 </aside>
