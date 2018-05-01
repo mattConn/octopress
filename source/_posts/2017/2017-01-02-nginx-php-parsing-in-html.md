@@ -21,6 +21,7 @@ categories: ['web development']
 ## The First And More Obvious Step
 
 To enable parsing of PHP in HTML files, editing a server block's location block to include files with an HTML extension should be sufficient.  
+<!--more-->
 For example:  
 
 ```
@@ -32,6 +33,7 @@ location ~ \.(php|html)$ {
 ```  
 
 However, since I am working with PHP 7, whose full name is "php7.0" (which is usefully descriptive but makes things tricky when initially looking for related directories or daemons), I had an extra step in order to make this work. And apparently, all PHP versions, from late php5.\* to php7.0, will require this extra step.
+
 
 ## The Final And Not-So-Obvious Step
 

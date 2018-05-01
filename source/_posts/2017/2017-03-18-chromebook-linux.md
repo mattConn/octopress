@@ -12,6 +12,8 @@ I love my Chromebook (as evidenced in [this](http://{{ site.noita.domain }}/blog
 
 However, the restrictions ChromeOS placed on me had been noticeable since the beginning; and I knew I would be restricted to Chrome Apps, extensions, and Play store applications, but didn't count on how annoying this restriction would wind up being. Fortunately, there were workarounds.  
 
+<!--more-->
+
 ## Crouton: An Early Solution
 [Crouton](https://github.com/dnschneid/crouton) proved to be very easy to install and useful from the start. By creating a chroot and installing my distro of choice in it, I could run Ubuntu either by switching over to the chroot or accessing it from the Crosh command line.  
 

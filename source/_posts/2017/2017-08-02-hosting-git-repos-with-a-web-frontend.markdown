@@ -10,6 +10,8 @@ Hosting your git repositories yourself is as simple as `git init --bare` (or `gi
 
 Having your repos on GitHub too makes for a nice redundancy (or on any other git server), and a remote on your server, on GitHub and a local copy makes for three redundancies. You can push to multiple remotes by adding a few lines in your project's git config.
 
+<!--more-->
+
 In your local copy of the repo, edit `.git/config` and add a new block:
 
     [remote "all"]

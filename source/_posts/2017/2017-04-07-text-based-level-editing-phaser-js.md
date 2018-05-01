@@ -23,6 +23,8 @@ If you are familiar with roguelikes (turn-based dungeon crawlers) such as Nethac
 
 Here I will explain how I use a similar approach to create the layout of rooms in a game I am working on and how I use Phaser (JS game engine) to render the rooms based on my layouts.
 
+<!--more-->
+
 The following array of strings represents a single room: 
 
 <div class="highlighter-rouge">

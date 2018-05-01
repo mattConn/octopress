@@ -6,7 +6,9 @@ comments: true
 categories: ['web development']
 ---
 
-Having to set up Octopress to use with GitHub pages again, I realized there are a few extra steps I needed to perform that weren't in the <a href="http://octopress.org/docs/">default instructions</a> on the octopress website:
+Having to set up Octopress to use with GitHub pages again, I realized there are a few extra steps I needed to perform that weren't in the <a href="http://octopress.org/docs/">default instructions</a> on the octopress website.
+
+<!--more-->
 
 ## Create a new branch 
 Create a new branch after forking the octopress repository; this new branch will be the one you work out of, as the deploy rake task deploys to the master branch (you will need to pull and merge on every commit if you do not do this).

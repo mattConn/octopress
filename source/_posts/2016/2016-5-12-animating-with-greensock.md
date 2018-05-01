@@ -14,6 +14,8 @@ categories: ['web development']
 
 I've recently been introduced to animating with the powerful JavaScript library GreenSock. It’s quite impressive, notably for how manageable its animations are. Unlike CSS3, which measures its animations with percentages, GreenSock uses seconds for timing. GreenSock is also capable of applying multiple animations to a single element, each running either consecutively or simultaneously, which is something CSS3 is not capable of either.
 
+<!--more-->
+
 The real beauty of GreenSock is how much control it affords. Much like the animations they control, tweens (the animations between two keyframes) can be controlled with a timeline. This is essentially a container for tweens, and timelines themselves can be nested in other timelines, affording even more control.
 
 After building out a complex sequence of animations, you’ll find GreenSock’s afforded control becomes especially important when changing the animation or timing of your sequence. Whether it be within a single tween or an entire timeline, making changes is easy and painless, and will not affect adjacent animations.

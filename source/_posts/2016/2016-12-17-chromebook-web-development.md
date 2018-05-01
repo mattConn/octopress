@@ -18,6 +18,8 @@ categories: ['web development', 'linux']
 
 I recently purchased a Samsung Chromebook 3 so I could work on projects during my long commute or at my local coffee shop without worrying about losing or breaking my other more expensive portable machine. It's really nice and light, and with a little configuration, makes for a great portable web development environemnt. After all, ChromeOS is itself a linux distro, but things are a little hidden in this environment as ChromeOS is meant to be easily accessible and to leave the user as little room as possible to screw things up.
 
+<!--more-->
+
 ## First, Enable Developer Mode
 [Enabling developer mode](http://www.howtogeek.com/210817/how-to-enable-developer-mode-on-your-chromebook/) is very easy and necessary to get things started. This will allow you to access ChromeOS's native shell, or "Crosh", which runs in Chrome as an extension which is really cool; ctrl+alt+t will bring you there. From Crosh, we can then access our typical unix shell by simply typing "shell."
 
