@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | MattConn.io]]></title>
   <link href="http://mattconn.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://mattconn.github.io/"/>
-  <updated>2018-05-01T07:30:39-04:00</updated>
+  <updated>2018-05-01T08:19:51-04:00</updated>
   <id>http://mattconn.github.io/</id>
   <author>
     <name><![CDATA[Matthew Connelly]]></name>
@@ -21,6 +21,9 @@
     <content type="html"><![CDATA[<p>I love my Chromebook (as evidenced in <a href="http:///blog/2016/chromebook-web-development/">this</a> post); I bring it everywhere as it comes in handy for long commutes and, weighing in at around 3 pounds, isn&rsquo;t the least bit cumbersome.</p>
 
 <p>However, the restrictions ChromeOS placed on me had been noticeable since the beginning; and I knew I would be restricted to Chrome Apps, extensions, and Play store applications, but didn&rsquo;t count on how annoying this restriction would wind up being. Fortunately, there were workarounds.</p>
+
+<!--more-->
+
 
 <h2>Crouton: An Early Solution</h2>
 
@@ -75,6 +78,9 @@
 
 
 <p>I recently purchased a Samsung Chromebook 3 so I could work on projects during my long commute or at my local coffee shop without worrying about losing or breaking my other more expensive portable machine. It&rsquo;s really nice and light, and with a little configuration, makes for a great portable web development environemnt. After all, ChromeOS is itself a linux distro, but things are a little hidden in this environment as ChromeOS is meant to be easily accessible and to leave the user as little room as possible to screw things up.</p>
+
+<!--more-->
+
 
 <h2>First, Enable Developer Mode</h2>
 

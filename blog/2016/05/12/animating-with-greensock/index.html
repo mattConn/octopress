@@ -105,6 +105,9 @@
 
 <p>I&rsquo;ve recently been introduced to animating with the powerful JavaScript library GreenSock. It’s quite impressive, notably for how manageable its animations are. Unlike CSS3, which measures its animations with percentages, GreenSock uses seconds for timing. GreenSock is also capable of applying multiple animations to a single element, each running either consecutively or simultaneously, which is something CSS3 is not capable of either.</p>
 
+<!--more-->
+
+
 <p>The real beauty of GreenSock is how much control it affords. Much like the animations they control, tweens (the animations between two keyframes) can be controlled with a timeline. This is essentially a container for tweens, and timelines themselves can be nested in other timelines, affording even more control.</p>
 
 <p>After building out a complex sequence of animations, you’ll find GreenSock’s afforded control becomes especially important when changing the animation or timing of your sequence. Whether it be within a single tween or an entire timeline, making changes is easy and painless, and will not affect adjacent animations.</p>
@@ -163,6 +166,12 @@
   </footer>
 </article>
 
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
 </div>
 
 <aside class="sidebar">
@@ -211,6 +220,22 @@
 
 </footer>
   
+
+<script type="text/javascript">
+      var disqus_shortname = 'mattconn-1';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://mattconn.github.io/blog/2016/05/12/animating-with-greensock/';
+        var disqus_url = 'http://mattconn.github.io/blog/2016/05/12/animating-with-greensock/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
 

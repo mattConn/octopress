@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Web Development | MattConn.io]]></title>
   <link href="http://mattconn.github.io/blog/categories/web-development/atom.xml" rel="self"/>
   <link href="http://mattconn.github.io/"/>
-  <updated>2018-05-01T07:30:39-04:00</updated>
+  <updated>2018-05-01T08:19:51-04:00</updated>
   <id>http://mattconn.github.io/</id>
   <author>
     <name><![CDATA[Matthew Connelly]]></name>
@@ -18,7 +18,10 @@
     <link href="http://mattconn.github.io/blog/2018/04/20/extra-steps-needed-for-setting-up-octopress-github-pages/"/>
     <updated>2018-04-20T00:51:16-04:00</updated>
     <id>http://mattconn.github.io/blog/2018/04/20/extra-steps-needed-for-setting-up-octopress-github-pages</id>
-    <content type="html"><![CDATA[<p>Having to set up Octopress to use with GitHub pages again, I realized there are a few extra steps I needed to perform that weren&rsquo;t in the <a href="http://octopress.org/docs/">default instructions</a> on the octopress website:</p>
+    <content type="html"><![CDATA[<p>Having to set up Octopress to use with GitHub pages again, I realized there are a few extra steps I needed to perform that weren&rsquo;t in the <a href="http://octopress.org/docs/">default instructions</a> on the octopress website.</p>
+
+<!--more-->
+
 
 <h2>Create a new branch</h2>
 
@@ -44,6 +47,9 @@
     <content type="html"><![CDATA[<p>Hosting your git repositories yourself is as simple as <code>git init --bare</code> (or <code>git clone --bare</code> for existing repos) in a directory on your server, and then adding the remote to your local repo: <code>git remote add myServer ssh://me@server.address/path/to/repo/project.git</code>.</p>
 
 <p>Having your repos on GitHub too makes for a nice redundancy (or on any other git server), and a remote on your server, on GitHub and a local copy makes for three redundancies. You can push to multiple remotes by adding a few lines in your project&rsquo;s git config.</p>
+
+<!--more-->
+
 
 <p>In your local copy of the repo, edit <code>.git/config</code> and add a new block:</p>
 
@@ -97,6 +103,9 @@ Here are some issues I encountered and their solutions:</p>
 <p>If you are familiar with roguelikes (turn-based dungeon crawlers) such as Nethack, then you are no doubt familiar with the idea of a game&rsquo;s elements being displayed entirely as ASCII characters.</p>
 
 <p>Here I will explain how I use a similar approach to create the layout of rooms in a game I am working on and how I use Phaser (JS game engine) to render the rooms based on my layouts.</p>
+
+<!--more-->
+
 
 <p>The following array of strings represents a single room:</p>
 
@@ -229,8 +238,12 @@ Here are some issues I encountered and their solutions:</p>
 
 <h2>The First And More Obvious Step</h2>
 
-<p>To enable parsing of PHP in HTML files, editing a server block&rsquo;s location block to include files with an HTML extension should be sufficient.<br/>
-For example:</p>
+<p>To enable parsing of PHP in HTML files, editing a server block&rsquo;s location block to include files with an HTML extension should be sufficient.</p>
+
+<!--more-->
+
+
+<p>For example:</p>
 
 <pre><code># /etc/nginx/sites-available/mywebsite.com
 location ~ \.(php|html)$ {
@@ -297,6 +310,9 @@ For me, <code>php-fpm.conf</code> lives at <code>/etc/php/7.0/</code>, with <cod
 
 
 <p>I recently purchased a Samsung Chromebook 3 so I could work on projects during my long commute or at my local coffee shop without worrying about losing or breaking my other more expensive portable machine. It&rsquo;s really nice and light, and with a little configuration, makes for a great portable web development environemnt. After all, ChromeOS is itself a linux distro, but things are a little hidden in this environment as ChromeOS is meant to be easily accessible and to leave the user as little room as possible to screw things up.</p>
+
+<!--more-->
+
 
 <h2>First, Enable Developer Mode</h2>
 

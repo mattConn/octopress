@@ -4,7 +4,7 @@
   <title><![CDATA[MattConn.io]]></title>
   <link href="http://mattconn.github.io/atom.xml" rel="self"/>
   <link href="http://mattconn.github.io/"/>
-  <updated>2018-05-01T07:30:39-04:00</updated>
+  <updated>2018-05-01T08:19:51-04:00</updated>
   <id>http://mattconn.github.io/</id>
   <author>
     <name><![CDATA[Matthew Connelly]]></name>
@@ -18,7 +18,10 @@
     <link href="http://mattconn.github.io/blog/2018/04/20/extra-steps-needed-for-setting-up-octopress-github-pages/"/>
     <updated>2018-04-20T00:51:16-04:00</updated>
     <id>http://mattconn.github.io/blog/2018/04/20/extra-steps-needed-for-setting-up-octopress-github-pages</id>
-    <content type="html"><![CDATA[<p>Having to set up Octopress to use with GitHub pages again, I realized there are a few extra steps I needed to perform that weren&rsquo;t in the <a href="http://octopress.org/docs/">default instructions</a> on the octopress website:</p>
+    <content type="html"><![CDATA[<p>Having to set up Octopress to use with GitHub pages again, I realized there are a few extra steps I needed to perform that weren&rsquo;t in the <a href="http://octopress.org/docs/">default instructions</a> on the octopress website.</p>
+
+<!--more-->
+
 
 <h2>Create a new branch</h2>
 
@@ -44,6 +47,9 @@
     <content type="html"><![CDATA[<p>Hosting your git repositories yourself is as simple as <code>git init --bare</code> (or <code>git clone --bare</code> for existing repos) in a directory on your server, and then adding the remote to your local repo: <code>git remote add myServer ssh://me@server.address/path/to/repo/project.git</code>.</p>
 
 <p>Having your repos on GitHub too makes for a nice redundancy (or on any other git server), and a remote on your server, on GitHub and a local copy makes for three redundancies. You can push to multiple remotes by adding a few lines in your project&rsquo;s git config.</p>
+
+<!--more-->
+
 
 <p>In your local copy of the repo, edit <code>.git/config</code> and add a new block:</p>
 
@@ -97,6 +103,9 @@ Here are some issues I encountered and their solutions:</p>
 <p>If you are familiar with roguelikes (turn-based dungeon crawlers) such as Nethack, then you are no doubt familiar with the idea of a game&rsquo;s elements being displayed entirely as ASCII characters.</p>
 
 <p>Here I will explain how I use a similar approach to create the layout of rooms in a game I am working on and how I use Phaser (JS game engine) to render the rooms based on my layouts.</p>
+
+<!--more-->
+
 
 <p>The following array of strings represents a single room:</p>
 
@@ -225,6 +234,9 @@ This room-rendering function currently only works with one level but should scal
 
 <p>However, the restrictions ChromeOS placed on me had been noticeable since the beginning; and I knew I would be restricted to Chrome Apps, extensions, and Play store applications, but didn&rsquo;t count on how annoying this restriction would wind up being. Fortunately, there were workarounds.</p>
 
+<!--more-->
+
+
 <h2>Crouton: An Early Solution</h2>
 
 <p><a href="https://github.com/dnschneid/crouton">Crouton</a> proved to be very easy to install and useful from the start. By creating a chroot and installing my distro of choice in it, I could run Ubuntu either by switching over to the chroot or accessing it from the Crosh command line.</p>
@@ -284,8 +296,12 @@ This room-rendering function currently only works with one level but should scal
 
 <h2>The First And More Obvious Step</h2>
 
-<p>To enable parsing of PHP in HTML files, editing a server block&rsquo;s location block to include files with an HTML extension should be sufficient.<br/>
-For example:</p>
+<p>To enable parsing of PHP in HTML files, editing a server block&rsquo;s location block to include files with an HTML extension should be sufficient.</p>
+
+<!--more-->
+
+
+<p>For example:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -360,6 +376,9 @@ For me, <code>php-fpm.conf</code> lives at <code>/etc/php/7.0/</code>, with <cod
 
 <p>I recently purchased a Samsung Chromebook 3 so I could work on projects during my long commute or at my local coffee shop without worrying about losing or breaking my other more expensive portable machine. It&rsquo;s really nice and light, and with a little configuration, makes for a great portable web development environemnt. After all, ChromeOS is itself a linux distro, but things are a little hidden in this environment as ChromeOS is meant to be easily accessible and to leave the user as little room as possible to screw things up.</p>
 
+<!--more-->
+
+
 <h2>First, Enable Developer Mode</h2>
 
 <p><a href="http://www.howtogeek.com/210817/how-to-enable-developer-mode-on-your-chromebook/">Enabling developer mode</a> is very easy and necessary to get things started. This will allow you to access ChromeOS&rsquo;s native shell, or &ldquo;Crosh&rdquo;, which runs in Chrome as an extension which is really cool; ctrl+alt+t will bring you there. From Crosh, we can then access our typical unix shell by simply typing &ldquo;shell.&rdquo;</p>
@@ -384,6 +403,9 @@ For me, <code>php-fpm.conf</code> lives at <code>/etc/php/7.0/</code>, with <cod
     <updated>2016-08-28T00:00:00-04:00</updated>
     <id>http://mattconn.github.io/blog/2016/08/28/custom-addthis-setup</id>
     <content type="html"><![CDATA[<p>Getting AddThis sharing set up exactly how I wanted took some digging the first time around. Maybe, like me, you wanted AddThis&rsquo;s functionality but with your own styles, and not the AddThis brand buttons. Here&rsquo;s how I set it up, allowing for full customization.</p>
+
+<!--more-->
+
 
 <h2>Considerations</h2>
 
@@ -477,6 +499,9 @@ While mailto will open your device&rsquo;s default mail client, then populate th
     <content type="html"><![CDATA[<p><i>Originally written for <a href="https://thecharlesnyc.com/unordered-list/green-sock" target="_blank">The Charles NYC</a>.</i></p>
 
 <p>I&rsquo;ve recently been introduced to animating with the powerful JavaScript library GreenSock. It’s quite impressive, notably for how manageable its animations are. Unlike CSS3, which measures its animations with percentages, GreenSock uses seconds for timing. GreenSock is also capable of applying multiple animations to a single element, each running either consecutively or simultaneously, which is something CSS3 is not capable of either.</p>
+
+<!--more-->
+
 
 <p>The real beauty of GreenSock is how much control it affords. Much like the animations they control, tweens (the animations between two keyframes) can be controlled with a timeline. This is essentially a container for tweens, and timelines themselves can be nested in other timelines, affording even more control.</p>
 

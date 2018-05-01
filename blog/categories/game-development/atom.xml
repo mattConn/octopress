@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Game Development | MattConn.io]]></title>
   <link href="http://mattconn.github.io/blog/categories/game-development/atom.xml" rel="self"/>
   <link href="http://mattconn.github.io/"/>
-  <updated>2018-05-01T07:30:39-04:00</updated>
+  <updated>2018-05-01T08:19:51-04:00</updated>
   <id>http://mattconn.github.io/</id>
   <author>
     <name><![CDATA[Matthew Connelly]]></name>
@@ -23,6 +23,9 @@
 <p>If you are familiar with roguelikes (turn-based dungeon crawlers) such as Nethack, then you are no doubt familiar with the idea of a game&rsquo;s elements being displayed entirely as ASCII characters.</p>
 
 <p>Here I will explain how I use a similar approach to create the layout of rooms in a game I am working on and how I use Phaser (JS game engine) to render the rooms based on my layouts.</p>
+
+<!--more-->
+
 
 <p>The following array of strings represents a single room:</p>
 
