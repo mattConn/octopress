@@ -151,6 +151,104 @@ MathJax.Hub.Config({
 
 <script type="math/tex; mode=display">452130 \ \div \ 7 \ = \ 64590</script>
 
+<p>Here is the Julia script I wrote to find these offsets:</p>
+<figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+</pre></td><td class="code"><pre><code class=""><span class="line"># division by 7
+</span><span class="line"># =============
+</span><span class="line">#=
+</span><span class="line">Division by 7 always produces this pattern in the mantissa:
+</span><span class="line">1/7 = 0.142857... 
+</span><span class="line">This script checks the offset (or position shift) of this pattern
+</span><span class="line">for each quotient by checking the current pattern against the pattern in 1/7
+</span><span class="line">
+</span><span class="line">example:
+</span><span class="line">1/7 = 0.14285714285714285
+</span><span class="line">2/7 = 0.2857142857142857
+</span><span class="line">            ^ 
+</span><span class="line">The offset here is 4 (original pattern has been shifted over 4 places).
+</span><span class="line">=#
+</span><span class="line">
+</span><span class="line">master = string(1/7)
+</span><span class="line">
+</span><span class="line">println("quotient, decimal, and offset from 1/7:")
+</span><span class="line">
+</span><span class="line">last = '\0'
+</span><span class="line">for i in 1:100
+</span><span class="line">	current = string(i/7)
+</span><span class="line">	last = current
+</span><span class="line">
+</span><span class="line">	point = false # decimal point detection
+</span><span class="line">	cindex = 1 # character index of quotient string current (1-indexed)
+</span><span class="line">	
+</span><span class="line">	# find decimal point to ignore
+</span><span class="line">	while !point
+</span><span class="line">		if current[cindex] == '.'
+</span><span class="line">			point = true
+</span><span class="line">		end
+</span><span class="line">
+</span><span class="line">		cindex += 1
+</span><span class="line">	end
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">	# count offset from master quotient
+</span><span class="line">	masterOffset = 0
+</span><span class="line">	while current[cindex] != master[3] &amp;&amp; cindex &lt; length(current)
+</span><span class="line">		masterOffset += 1
+</span><span class="line">		cindex +=1
+</span><span class="line">	end
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">	println(i,"/7 : ",current, " : ", masterOffset)
+</span><span class="line">
+</span><span class="line">end</span></code></pre></td></tr></table></div></figure>
+
 <h2 id="a-quotient-of-seven-as-a-bad-rational-approximation-of-pi">A Quotient of Seven as a Bad Rational Approximation of Pi</h2>
 
 <script type="math/tex; mode=display">\frac{22}{7} \ = \ 3.142857142857143</script>
