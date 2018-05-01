@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Mathematics | MattConn.io]]></title>
+  <link href="http://mattconn.github.io/blog/categories/mathematics/atom.xml" rel="self"/>
+  <link href="http://mattconn.github.io/"/>
+  <updated>2018-05-01T17:48:06-04:00</updated>
+  <id>http://mattconn.github.io/</id>
+  <author>
+    <name><![CDATA[Matthew Connelly]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A Pattern in Quotients of Seven and Rational Pi]]></title>
+    <link href="http://mattconn.github.io/blog/2018/05/01/pattern-in-quotients-of-seven-and-pi/"/>
+    <updated>2018-05-01T08:39:58-04:00</updated>
+    <id>http://mattconn.github.io/blog/2018/05/01/pattern-in-quotients-of-seven-and-pi</id>
+    <content type="html"><![CDATA[<script type="math/tex; mode=display">\frac{1}{7} \ = \ 0.\overline{142857}</script>
+
+<p>A quotient of seven will always have this repeating pattern in the mantissa (the fractional portion beyond the decimal point). This pattern also “shifts” a certain predictable amount of digits every division. We could also think of a quotient of seven as a circular queue, with its mantissa “wrapping around”, like a speedometer or certain type of combination lock.</p>
+
+<!--more-->
+
+<p>For every seven quotients, we can see the number of digit shifts (or rotations, in terms of the queue/lock comparison) repeats, marked in the table below of 14 quotients of 7, in the column labeled “offset from 1/7” and underlined in the “decimal” column:</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{array}{c|l|c}
+\text{Quotient} & \text{Decimal} & \text{Offset from} \ \frac{1}{7} \\
+\hline
+1/7 & 0.14285714285714285 & 0 \\
+2/7 & 0.\underline{2857}142857142857 & 4 \\
+3/7 & 0.\underline{42857}142857142855 & 5 \\
+4/7 & 0.\underline{57}14285714285714 & 2 \\
+5/7 & 0.\underline{7}142857142857143 & 1 \\
+6/7 & 0.\underline{857}1428571428571 & 3 \\
+7/7 & 1.0 & 0 \\
+8/7 & 1.1428571428571428 & 0 \\
+9/7 & 1.\underline{2857}142857142858 & 4 \\
+10/7 & 1.\underline{42857}14285714286 & 5 \\
+11/7 & 1.\underline{57}14285714285714 & 2 \\
+12/7 & 1.\underline{7}142857142857142 & 1 \\
+13/7 & 1.\underline{857}1428571428572 & 3 \\
+14/7 & 2.0 & 0 \\
+\end{array} %]]&gt;</script>
+
+<p>Concatenating these offsets, you get the number:</p>
+
+<script type="math/tex; mode=display">0452130</script>
+
+<p>As an integer, this number is evenly divisible by 7, which is interesting.</p>
+
+<script type="math/tex; mode=display">452130 \ \div \ 7 \ = \ 64590</script>
+
+<h2 id="a-quotient-of-seven-as-a-bad-rational-approximation-of-pi">A Quotient of Seven as a Bad Rational Approximation of Pi</h2>
+
+<script type="math/tex; mode=display">\frac{22}{7} \ = \ 3.142857142857143</script>
+
+<p>This is one of the smaller rational approximations of pi, and it is a bad one; not because it only gets you two digits of pi (or pi rounded to one thousandth), but because it relates more to the nature of division by seven than to the nature of pi.<br />
+<br />
+Looking at the table shown earlier, quotients 1/7, then 8/7, both have the same mantissa as 22/7. We can then see that we can pick the offset from 1/7 that we want (from the available offsets 0, 4, 5, 2, 1 and 3), knowing the nature of division by 7, which can be modeled by an expression like the one below, the braces denoting the fractional part.</p>
+
+<script type="math/tex; mode=display">\left \{ \frac{(7 \times n) \ + k}{7} \right \}</script>
+
+<p>Here, n denotes some integral value that will give us a multiple of seven, with k denoting an increase in this multiple necessary to give us a mantissa after division by seven.<br />
+Then if we wanted to design a rational number that looked something like pi, we could consider that 1/7 has the digits 1 and 4 at the beginning of its mantissa. All that’s left would be the integer 3 in front. Using the expression above, we would wind up with:</p>
+
+<script type="math/tex; mode=display">\left \{ \frac{(7 \times 3) \ + 1}{7} \right \}</script>
+
+<p>This gets us our integer 3 and the mantissa we want (marked by the first offset, 0) through an addition of 1. As seen in the table, the first division by 7 out of any 7 divisions will have a mantissa starting with 1 and 4.</p>
+
+<script type="math/tex; mode=display">\left \{ \frac{22}{7} \right \} \ = \ \left \{\frac{1}{7} \right \}</script>
+
+<p>If we wanted the next offset available (mantissa of 1/7 shifted 4 digits right) but the same integer part (3.0), we would use the same expression above, but add 2 instead of 1, to get the second offset, and so on.</p>
+]]></content>
+  </entry>
+  
+</feed>
