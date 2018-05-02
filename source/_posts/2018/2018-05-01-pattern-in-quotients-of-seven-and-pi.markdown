@@ -109,7 +109,7 @@ Then if we wanted to design a rational number that looked something like pi, we 
 
 $$\left \{ \frac{(7 \times 3) \ + 1}{7} \right \}$$
 
-This gets us our integer 3 and the mantissa we want (marked by the first offset, 0) through an addition of 1. As seen in the table, the first division by 7 out of any 7 divisions will have a mantissa starting with 1 and 4.
+This gets us our integer 3 and the mantissa we want through an addition of 1. As seen in the table, the first division by 7 out of any 7 divisions will have a mantissa starting with 1 and 4.
 
 $$\left \{ \frac{22}{7} \right \} \ = \ \left \{\frac{1}{7} \right \}$$
 
