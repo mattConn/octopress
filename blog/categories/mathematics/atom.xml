@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Mathematics | MattConn.io]]></title>
-  <link href="http://mattconn.github.io/blog/categories/mathematics/atom.xml" rel="self"/>
-  <link href="http://mattconn.github.io/"/>
-  <updated>2018-05-01T21:51:41-04:00</updated>
-  <id>http://mattconn.github.io/</id>
+  <link href="http://mattconn.io/blog/categories/mathematics/atom.xml" rel="self"/>
+  <link href="http://mattconn.io/"/>
+  <updated>2018-05-07T00:07:06-04:00</updated>
+  <id>http://mattconn.io/</id>
   <author>
     <name><![CDATA[Matthew Connelly]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[A Pattern in Quotients of Seven and Rational Pi]]></title>
-    <link href="http://mattconn.github.io/blog/2018/05/01/pattern-in-quotients-of-seven-and-pi/"/>
+    <link href="http://mattconn.io/blog/2018/05/01/pattern-in-quotients-of-seven-and-pi/"/>
     <updated>2018-05-01T08:39:58-04:00</updated>
-    <id>http://mattconn.github.io/blog/2018/05/01/pattern-in-quotients-of-seven-and-pi</id>
+    <id>http://mattconn.io/blog/2018/05/01/pattern-in-quotients-of-seven-and-pi</id>
     <content type="html"><![CDATA[<script type="math/tex; mode=display">\frac{1}{7} \ = \ 0.\overline{142857}</script>
 
 <p>A quotient of seven will always have this repeating pattern in the mantissa (the fractional portion beyond the decimal point). This pattern also “shifts” a certain predictable amount of digits every division. We could also think of a quotient of seven as a circular queue, with its mantissa “wrapping around”, like a speedometer or certain type of combination lock.</p>

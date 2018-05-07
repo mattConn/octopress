@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[MattConn.io]]></title>
-  <link href="http://mattconn.github.io/atom.xml" rel="self"/>
-  <link href="http://mattconn.github.io/"/>
-  <updated>2018-05-01T21:51:41-04:00</updated>
-  <id>http://mattconn.github.io/</id>
+  <link href="http://mattconn.io/atom.xml" rel="self"/>
+  <link href="http://mattconn.io/"/>
+  <updated>2018-05-07T00:07:06-04:00</updated>
+  <id>http://mattconn.io/</id>
   <author>
     <name><![CDATA[Matthew Connelly]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[A Pattern in Quotients of Seven and Rational Pi]]></title>
-    <link href="http://mattconn.github.io/blog/2018/05/01/pattern-in-quotients-of-seven-and-pi/"/>
+    <link href="http://mattconn.io/blog/2018/05/01/pattern-in-quotients-of-seven-and-pi/"/>
     <updated>2018-05-01T08:39:58-04:00</updated>
-    <id>http://mattconn.github.io/blog/2018/05/01/pattern-in-quotients-of-seven-and-pi</id>
+    <id>http://mattconn.io/blog/2018/05/01/pattern-in-quotients-of-seven-and-pi</id>
     <content type="html"><![CDATA[<script type="math/tex; mode=display">\frac{1}{7} \ = \ 0.\overline{142857}</script>
 
 <p>A quotient of seven will always have this repeating pattern in the mantissa (the fractional portion beyond the decimal point). This pattern also “shifts” a certain predictable amount of digits every division. We could also think of a quotient of seven as a circular queue, with its mantissa “wrapping around”, like a speedometer or certain type of combination lock.</p>
@@ -177,9 +177,9 @@ Then if we wanted to design a rational number that looked something like pi, we 
   
   <entry>
     <title type="html"><![CDATA[Extra Steps Needed for Setting Up Octopress With GitHub Pages]]></title>
-    <link href="http://mattconn.github.io/blog/2018/04/20/extra-steps-needed-for-setting-up-octopress-github-pages/"/>
+    <link href="http://mattconn.io/blog/2018/04/20/extra-steps-needed-for-setting-up-octopress-github-pages/"/>
     <updated>2018-04-20T00:51:16-04:00</updated>
-    <id>http://mattconn.github.io/blog/2018/04/20/extra-steps-needed-for-setting-up-octopress-github-pages</id>
+    <id>http://mattconn.io/blog/2018/04/20/extra-steps-needed-for-setting-up-octopress-github-pages</id>
     <content type="html"><![CDATA[<p>Having to set up Octopress to use with GitHub pages again, I realized there are a few extra steps I needed to perform that weren’t in the <a href="http://octopress.org/docs/">default instructions</a> on the octopress website.</p>
 
 <!--more-->
@@ -199,9 +199,9 @@ Then if we wanted to design a rational number that looked something like pi, we 
   
   <entry>
     <title type="html"><![CDATA[Hosting Git Repos With a Web Frontend]]></title>
-    <link href="http://mattconn.github.io/blog/2017/08/02/hosting-git-repos-with-a-web-frontend/"/>
+    <link href="http://mattconn.io/blog/2017/08/02/hosting-git-repos-with-a-web-frontend/"/>
     <updated>2017-08-02T00:21:17-04:00</updated>
-    <id>http://mattconn.github.io/blog/2017/08/02/hosting-git-repos-with-a-web-frontend</id>
+    <id>http://mattconn.io/blog/2017/08/02/hosting-git-repos-with-a-web-frontend</id>
     <content type="html"><![CDATA[<p>Hosting your git repositories yourself is as simple as <code>git init --bare</code> (or <code>git clone --bare</code> for existing repos) in a directory on your server, and then adding the remote to your local repo: <code>git remote add myServer ssh://me@server.address/path/to/repo/project.git</code>.</p>
 
 <p>Having your repos on GitHub too makes for a nice redundancy (or on any other git server), and a remote on your server, on GitHub and a local copy makes for three redundancies. You can push to multiple remotes by adding a few lines in your project’s git config.</p>
@@ -252,9 +252,9 @@ Here are some issues I encountered and their solutions:</p>
   
   <entry>
     <title type="html"><![CDATA[Game Development - Text-based Level Editing and Phaser JS]]></title>
-    <link href="http://mattconn.github.io/blog/2017/04/07/text-based-level-editing-phaser-js/"/>
+    <link href="http://mattconn.io/blog/2017/04/07/text-based-level-editing-phaser-js/"/>
     <updated>2017-04-07T00:00:00-04:00</updated>
-    <id>http://mattconn.github.io/blog/2017/04/07/text-based-level-editing-phaser-js</id>
+    <id>http://mattconn.io/blog/2017/04/07/text-based-level-editing-phaser-js</id>
     <content type="html"><![CDATA[<style>
     .room-array {
         border-style: none;
@@ -391,9 +391,9 @@ Here are some issues I encountered and their solutions:</p>
   
   <entry>
     <title type="html"><![CDATA[Chromebook Linux - From Crouton to GalliumOS]]></title>
-    <link href="http://mattconn.github.io/blog/2017/03/18/chromebook-linux/"/>
+    <link href="http://mattconn.io/blog/2017/03/18/chromebook-linux/"/>
     <updated>2017-03-18T00:00:00-04:00</updated>
-    <id>http://mattconn.github.io/blog/2017/03/18/chromebook-linux</id>
+    <id>http://mattconn.io/blog/2017/03/18/chromebook-linux</id>
     <content type="html"><![CDATA[<p>I love my Chromebook (as evidenced in <a href="http:///blog/2016/chromebook-web-development/">this</a> post); I bring it everywhere as it comes in handy for long commutes and, weighing in at around 3 pounds, isn’t the least bit cumbersome.</p>
 
 <p>However, the restrictions ChromeOS placed on me had been noticeable since the beginning; and I knew I would be restricted to Chrome Apps, extensions, and Play store applications, but didn’t count on how annoying this restriction would wind up being. Fortunately, there were workarounds.</p>
@@ -422,9 +422,9 @@ Here are some issues I encountered and their solutions:</p>
   
   <entry>
     <title type="html"><![CDATA[Parsing In-line PHP With Nginx]]></title>
-    <link href="http://mattconn.github.io/blog/2017/01/02/nginx-php-parsing-in-html/"/>
+    <link href="http://mattconn.io/blog/2017/01/02/nginx-php-parsing-in-html/"/>
     <updated>2017-01-02T00:00:00-05:00</updated>
-    <id>http://mattconn.github.io/blog/2017/01/02/nginx-php-parsing-in-html</id>
+    <id>http://mattconn.io/blog/2017/01/02/nginx-php-parsing-in-html</id>
     <content type="html"><![CDATA[<h3 id="my-environment">My Environment</h3>
 <ul>
   <li>Nginx version
@@ -495,9 +495,9 @@ For me, <code>php-fpm.conf</code> lives at <code>/etc/php/7.0/</code>, with <cod
   
   <entry>
     <title type="html"><![CDATA[Chromebook Web Development]]></title>
-    <link href="http://mattconn.github.io/blog/2016/12/17/chromebook-web-development/"/>
+    <link href="http://mattconn.io/blog/2016/12/17/chromebook-web-development/"/>
     <updated>2016-12-17T00:00:00-05:00</updated>
-    <id>http://mattconn.github.io/blog/2016/12/17/chromebook-web-development</id>
+    <id>http://mattconn.io/blog/2016/12/17/chromebook-web-development</id>
     <content type="html"><![CDATA[<h2 id="quick-rundown">Quick Rundown</h2>
 <ul>
   <li><strong>Machine:</strong>
@@ -539,9 +539,9 @@ For me, <code>php-fpm.conf</code> lives at <code>/etc/php/7.0/</code>, with <cod
   
   <entry>
     <title type="html"><![CDATA[Quick and Custom AddThis Setup]]></title>
-    <link href="http://mattconn.github.io/blog/2016/08/28/custom-addthis-setup/"/>
+    <link href="http://mattconn.io/blog/2016/08/28/custom-addthis-setup/"/>
     <updated>2016-08-28T00:00:00-04:00</updated>
-    <id>http://mattconn.github.io/blog/2016/08/28/custom-addthis-setup</id>
+    <id>http://mattconn.io/blog/2016/08/28/custom-addthis-setup</id>
     <content type="html"><![CDATA[<p>Getting AddThis sharing set up exactly how I wanted took some digging the first time around. Maybe, like me, you wanted AddThis’s functionality but with your own styles, and not the AddThis brand buttons. Here’s how I set it up, allowing for full customization.</p>
 
 <!--more-->
@@ -629,9 +629,9 @@ While mailto will open your device’s default mail client, then populate the su
   
   <entry>
     <title type="html"><![CDATA[Animating With GreenSock]]></title>
-    <link href="http://mattconn.github.io/blog/2016/05/12/animating-with-greensock/"/>
+    <link href="http://mattconn.io/blog/2016/05/12/animating-with-greensock/"/>
     <updated>2016-05-12T00:00:00-04:00</updated>
-    <id>http://mattconn.github.io/blog/2016/05/12/animating-with-greensock</id>
+    <id>http://mattconn.io/blog/2016/05/12/animating-with-greensock</id>
     <content type="html"><![CDATA[<p><i>Originally written for <a href="https://thecharlesnyc.com/unordered-list/green-sock" target="_blank">The Charles NYC</a>.</i></p>
 
 <p>I’ve recently been introduced to animating with the powerful JavaScript library GreenSock. It’s quite impressive, notably for how manageable its animations are. Unlike CSS3, which measures its animations with percentages, GreenSock uses seconds for timing. GreenSock is also capable of applying multiple animations to a single element, each running either consecutively or simultaneously, which is something CSS3 is not capable of either.</p>

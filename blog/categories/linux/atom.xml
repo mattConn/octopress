@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Linux | MattConn.io]]></title>
-  <link href="http://mattconn.github.io/blog/categories/linux/atom.xml" rel="self"/>
-  <link href="http://mattconn.github.io/"/>
-  <updated>2018-05-01T21:51:41-04:00</updated>
-  <id>http://mattconn.github.io/</id>
+  <link href="http://mattconn.io/blog/categories/linux/atom.xml" rel="self"/>
+  <link href="http://mattconn.io/"/>
+  <updated>2018-05-07T00:07:06-04:00</updated>
+  <id>http://mattconn.io/</id>
   <author>
     <name><![CDATA[Matthew Connelly]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Chromebook Linux - From Crouton to GalliumOS]]></title>
-    <link href="http://mattconn.github.io/blog/2017/03/18/chromebook-linux/"/>
+    <link href="http://mattconn.io/blog/2017/03/18/chromebook-linux/"/>
     <updated>2017-03-18T00:00:00-04:00</updated>
-    <id>http://mattconn.github.io/blog/2017/03/18/chromebook-linux</id>
+    <id>http://mattconn.io/blog/2017/03/18/chromebook-linux</id>
     <content type="html"><![CDATA[<p>I love my Chromebook (as evidenced in <a href="http:///blog/2016/chromebook-web-development/">this</a> post); I bring it everywhere as it comes in handy for long commutes and, weighing in at around 3 pounds, isn’t the least bit cumbersome.</p>
 
 <p>However, the restrictions ChromeOS placed on me had been noticeable since the beginning; and I knew I would be restricted to Chrome Apps, extensions, and Play store applications, but didn’t count on how annoying this restriction would wind up being. Fortunately, there were workarounds.</p>
@@ -46,9 +46,9 @@
   
   <entry>
     <title type="html"><![CDATA[Chromebook Web Development]]></title>
-    <link href="http://mattconn.github.io/blog/2016/12/17/chromebook-web-development/"/>
+    <link href="http://mattconn.io/blog/2016/12/17/chromebook-web-development/"/>
     <updated>2016-12-17T00:00:00-05:00</updated>
-    <id>http://mattconn.github.io/blog/2016/12/17/chromebook-web-development</id>
+    <id>http://mattconn.io/blog/2016/12/17/chromebook-web-development</id>
     <content type="html"><![CDATA[<h2 id="quick-rundown">Quick Rundown</h2>
 <ul>
   <li><strong>Machine:</strong>

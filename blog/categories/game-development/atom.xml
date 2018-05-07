@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Game Development | MattConn.io]]></title>
-  <link href="http://mattconn.github.io/blog/categories/game-development/atom.xml" rel="self"/>
-  <link href="http://mattconn.github.io/"/>
-  <updated>2018-05-01T21:51:41-04:00</updated>
-  <id>http://mattconn.github.io/</id>
+  <link href="http://mattconn.io/blog/categories/game-development/atom.xml" rel="self"/>
+  <link href="http://mattconn.io/"/>
+  <updated>2018-05-07T00:07:06-04:00</updated>
+  <id>http://mattconn.io/</id>
   <author>
     <name><![CDATA[Matthew Connelly]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Game Development - Text-based Level Editing and Phaser JS]]></title>
-    <link href="http://mattconn.github.io/blog/2017/04/07/text-based-level-editing-phaser-js/"/>
+    <link href="http://mattconn.io/blog/2017/04/07/text-based-level-editing-phaser-js/"/>
     <updated>2017-04-07T00:00:00-04:00</updated>
-    <id>http://mattconn.github.io/blog/2017/04/07/text-based-level-editing-phaser-js</id>
+    <id>http://mattconn.io/blog/2017/04/07/text-based-level-editing-phaser-js</id>
     <content type="html"><![CDATA[<style>
     .room-array {
         border-style: none;
