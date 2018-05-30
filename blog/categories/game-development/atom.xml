@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Game Development | MattConn.io]]></title>
   <link href="http://mattconn.io/blog/categories/game-development/atom.xml" rel="self"/>
   <link href="http://mattconn.io/"/>
-  <updated>2018-05-29T12:07:46-04:00</updated>
+  <updated>2018-05-30T15:06:50-04:00</updated>
   <id>http://mattconn.io/</id>
   <author>
     <name><![CDATA[Matthew Connelly]]></name>
@@ -18,16 +18,7 @@
     <link href="http://mattconn.io/blog/2017/04/07/text-based-level-editing-phaser-js/"/>
     <updated>2017-04-07T00:00:00-04:00</updated>
     <id>http://mattconn.io/blog/2017/04/07/text-based-level-editing-phaser-js</id>
-    <content type="html"><![CDATA[<style>
-    .room-array {
-        border-style: none;
-		color: white;
-		background-color: black;
-		font-size: 12px;
-	}
-</style>
-
-<p>If you are familiar with roguelikes (turn-based dungeon crawlers) such as Nethack, then you are no doubt familiar with the idea of a game’s elements being displayed entirely as ASCII characters.</p>
+    <content type="html"><![CDATA[<p>If you are familiar with roguelikes (turn-based dungeon crawlers) such as Nethack, then you are no doubt familiar with the idea of a game’s elements being displayed entirely as ASCII characters.</p>
 
 <p>Here I will explain how I use a similar approach to create the layout of rooms in a game I am working on and how I use Phaser (JS game engine) to render the rooms based on my layouts.</p>
 
@@ -35,9 +26,7 @@
 
 <p>The following array of strings represents a single room:</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight room-array">
-<code class="room-array">
+<p><code>
    [
     //1         12             25
     'ppppppppppppppppppppppppp',//1
@@ -60,9 +49,7 @@
     'ppppppppppppppppppppppppp',//18
     'ppppppppppppppppppppppppp' //19
     ]
-</code>
-</pre>
-</div>
+</code></p>
 
 <p>“E” represents an enemy, and “p” represents an immovable block that can be used as a platform or wall. A dash represents empty space, simply because I find it easier to read than whitespace, although I am not exactly counting dashes to find any kind of distance.</p>
 
