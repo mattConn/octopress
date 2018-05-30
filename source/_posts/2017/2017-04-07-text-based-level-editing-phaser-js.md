@@ -9,15 +9,6 @@ comments: true
 published: true
 categories: ['web development', 'game development']
 ---
-<style>
-    .room-array {
-        border-style: none;
-		color: white;
-		background-color: black;
-		font-size: 12px;
-	}
-</style>
-
 
 If you are familiar with roguelikes (turn-based dungeon crawlers) such as Nethack, then you are no doubt familiar with the idea of a game's elements being displayed entirely as ASCII characters.  
 
@@ -27,9 +18,7 @@ Here I will explain how I use a similar approach to create the layout of rooms i
 
 The following array of strings represents a single room: 
 
-<div class="highlighter-rouge">
-<pre class="highlight room-array">
-<code class="room-array">
+```
    [
     //1         12             25
     'ppppppppppppppppppppppppp',//1
@@ -52,9 +41,7 @@ The following array of strings represents a single room:
     'ppppppppppppppppppppppppp',//18
     'ppppppppppppppppppppppppp' //19
     ]
-</code>
-</pre>
-</div>
+```
 
 "E" represents an enemy, and "p" represents an immovable block that can be used as a platform or wall. A dash represents empty space, simply because I find it easier to read than whitespace, although I am not exactly counting dashes to find any kind of distance.  
 
