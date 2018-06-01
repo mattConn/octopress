@@ -37,7 +37,11 @@ $$
 
 We're treating these letters as though they were digits (which they are now). Above is a table of base-10 numbers and their base-36 representation; a double-digit base-10 number can fit in a single base-36 digit.
 
-So converting the letters in my name from base-36 to base-10 yields:
+If you want to convert your name or a word from base-36 to base-10 yourself, you can try the small REPL below that simply uses javaScript's `parseInt(string, base)` function, which takes a string and converts it to an integer in a given base.
+<p data-height="233" data-theme-id="0" data-slug-hash="NzqBOO" data-default-tab="result" data-user="mattConn" data-embed-version="2" data-pen-title="Name to Base-10" class="codepen">See the Pen <a href="https://codepen.io/mattConn/pen/NzqBOO/">Name to Base-10</a> by Matthew Connelly (<a href="https://codepen.io/mattConn">@mattConn</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<br>
+Converting the letters in my name from base-36 to base-10 yields:
 
 $$[\mathrm{m,a,t,t,h,e,w}]_{36} \ = \ [22,10,29,29,17,14,32]_{10} $$
 
@@ -51,7 +55,9 @@ $$ \implies \mathrm{matthew}_{36} \ = \ 48543957608_{10} $$
 
 We take this sum because a number in any base $b$ incorporating some digit(s) $n$ is represented as the following:
 
-$$ \underbrace{\dots (n\cdot b^3)+(n\cdot b^2)+(n\cdot b^1)+(n\cdot b^0)}_{integer}.\underbrace{(n\cdot b^{-1})+ (n \cdot b^{-2}) + (n \cdot b^{-3}) + (n \cdot b^{-4}) \dots}_{rational}$$
+$$ \underbrace{\dots (n\cdot b^3)+(n\cdot b^2)+(n\cdot b^1)+(n\cdot b^0)}_{integer}\underbrace{.}_{point}\underbrace{(n\cdot b^{-1})+ (n \cdot b^{-2}) + (n \cdot b^{-3}) + (n \cdot b^{-4}) \dots}_{rational}$$
+
+When we multiply a digit by a base to some power, this power sets the position of the digit. We can concatenate any digits we want using this property of number systems, as well as extract them and chop off trailing digits (truncation).
 
 For example, for some arbitrary base-10 number, 215.25 (the price of a textbook maybe):
 
@@ -60,5 +66,3 @@ $$ 215.25 \ = \ (2\cdot10^2) + (1 \cdot 10^1) + (5\cdot10^0) + (2\cdot10^{-1})+(
 Or for some base-36 number that looks like the word "hello":
 
 $$ \mathrm{hello} \ = \ (\mathrm{h} \cdot36^4)+(\mathrm{e}\cdot36^3)+(\mathrm{l}\cdot36^2)+(\mathrm{l}\cdot36^1)+(\mathrm{o}\cdot36^0) $$
-
-When we multiply a digit by a base to some power, this power sets the position of the digit. We can concatenate any digits we want using this property of number systems, as well as extract them and chop off trailing digits (truncation).
