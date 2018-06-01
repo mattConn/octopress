@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Your Name as a Number in Base-36 and Decimal (Some Notes On Number Systems)"
+title: "Your Name as a Number in Base-36 (Some Notes On Number Systems)"
 date: 2018-05-31 08:39:58 -0400
 comments: true
 categories: mathematics
