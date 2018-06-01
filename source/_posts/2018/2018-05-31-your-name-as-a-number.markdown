@@ -57,4 +57,8 @@ For example, for some arbitrary base-10 number, 215.25 (the price of a textbook 
 
 $$ 215.25 \ = \ (2\cdot10^2) + (1 \cdot 10^1) + (5\cdot10^0) + (2\cdot10^{-1})+(5\cdot10^{-2}) $$
 
-When we multiply a digit by its base to some power, this power sets the position of the digit. We can concatenate any digits we want using this property of number systems, as well as extract them and truncate numbers.
+Or for some base-36 number that looks like the word "hello":
+
+$$ \mathrm{hello} \ = \ (\mathrm{h} \cdot36^4)+(\mathrm{e}\cdot36^3)+(\mathrm{l}\cdot36^2)+(\mathrm{l}\cdot36^1)+(\mathrm{o}\cdot36^0) $$
+
+When we multiply a digit by a base to some power, this power sets the position of the digit. We can concatenate any digits we want using this property of number systems, as well as extract them and chop off trailing digits (truncation).
