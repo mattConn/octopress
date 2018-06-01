@@ -9,7 +9,7 @@
   <meta name="author" content="Matthew Connelly">
 
   
-  <meta name="description" content="Your name (or any word) can be converted to a decimal number. Take my name. This could be read as a base-36 number: $ \ \mathrm{matthew}_{36} $ &hellip;">
+  <meta name="description" content="Your name (or any word) can be converted to a decimal number. Take my name. This could be read as a base-36 number: $ \ \mathrm{matthew}_{36} $ While &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -35,6 +35,17 @@
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
+
+<!--twitter card-->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@matterialDesign">
+
+  <meta name="twitter:title" content="Your Name as a Number in Base-36 (Some Notes On Number Systems)">
+
+
+  <meta name="twitter:description" content="">
+
+
 
   
   <script type="text/javascript">
@@ -122,17 +133,7 @@ MathJax.Hub.Config({
   </header>
 
 
-<div class="entry-content"><meta name="twitter:card" content="summary" />
-
-<meta name="twitter:site" content="@matterialDesign" />
-
-<meta name="twitter:title" content="Your Name as a Number in Base-36 (Some Notes On Number Systems)" />
-
-<meta name="twitter:description" content="Your Name as a Number in Base-36 (Some Notes On Number Systems)" />
-
-<meta name="twitter:image" content="http://mattconn.io/assets/twitter-cards/name-as-number-twitter-card.png" />
-
-<p>Your name (or any word) can be converted to a decimal number.</p>
+<div class="entry-content"><p>Your name (or any word) can be converted to a decimal number.</p>
 
 <p>Take my name. This could be read as a base-36 number: $ \  \mathrm{matthew}_{36} $</p>
 
@@ -172,6 +173,10 @@ MathJax.Hub.Config({
 Converting the letters in my name from base-36 to base-10 yields:</p>
 
 <script type="math/tex; mode=display">[\mathrm{m,a,t,t,h,e,w}]_{36} \ = \ [22,10,29,29,17,14,32]_{10}</script>
+
+<p>Then, to concatenate these base-10 digits, take the following sum:</p>
+
+<script type="math/tex; mode=display">(22\cdot36^6) + (10\cdot36^5) + (29\cdot36^4) + (29\cdot36^3)+(17\cdot36^2)+(14\cdot36^1)+(32\cdot36^0)</script>
 
 <script type="math/tex; mode=display">\implies \mathrm{matthew}_{36} \ = \ 48543957608_{10}</script>
 
