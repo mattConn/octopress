@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mathematics | MattConn.io]]></title>
   <link href="http://mattconn.io/blog/categories/mathematics/atom.xml" rel="self"/>
   <link href="http://mattconn.io/"/>
-  <updated>2018-05-31T23:31:16-04:00</updated>
+  <updated>2018-05-31T23:36:19-04:00</updated>
   <id>http://mattconn.io/</id>
   <author>
     <name><![CDATA[Matthew Connelly]]></name>
@@ -24,7 +24,9 @@
 
 <p>While base-36 may sound unusual, it is just a number system that follows the same rules as any other; for any base $b$, the largest digit that can be represented before having to carry is $b-1$.</p>
 
-<p>For example, in decimal (base-10), we can count up to 9, but once we reach 10 (the base), we reset the current digit back to 0 and carry the 1. A base-36 number system would obey the same rules; once we count up to 35 ($b-1$), counting any futher would require a digit carry until we reach 35 again.</p>
+<p>For example, in decimal (base-10), we can count up to 9, but once we reach 10 (the base), we reset the current digit back to 0 and carry the 1. A base-36 number system would obey the same rules; once we count up to 35 ($b-1$), counting any further would require a digit carry until we reach 35 again.</p>
+
+<!--more-->
 
 <p>We would use base-36 because we need enough room in the number system for digits 0-9 and the digits for the letters of the alphabet (A-Z, which will represent decimal values 10-26); the sum of these bases (10+26) gives us our new base: 36.</p>
 
