@@ -4,7 +4,7 @@
   <title><![CDATA[MattConn.io]]></title>
   <link href="http://mattconn.io/atom.xml" rel="self"/>
   <link href="http://mattconn.io/"/>
-  <updated>2018-06-01T11:24:39-04:00</updated>
+  <updated>2018-06-01T11:37:10-04:00</updated>
   <id>http://mattconn.io/</id>
   <author>
     <name><![CDATA[Matthew Connelly]]></name>
@@ -18,9 +18,9 @@
     <link href="http://mattconn.io/blog/2018/05/31/your-name-as-a-number/"/>
     <updated>2018-05-31T08:39:58-04:00</updated>
     <id>http://mattconn.io/blog/2018/05/31/your-name-as-a-number</id>
-    <content type="html"><![CDATA[<meta name="twitter:card" content="Your name (or any word) can be converted to a decimal number." />
+    <content type="html"><![CDATA[<meta name="twitter:card" content="summary" />
 
-<meta name="twitter:site" content="@flickr" />
+<meta name="twitter:site" content="@matterialDesign" />
 
 <meta name="twitter:title" content="Your Name as a Number in Base-36 (Some Notes On Number Systems)" />
 
