@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Animating With GreenSock - MattConn.io</title>
+  <title>Your Name as a Number in Base-36 and Decimal (Some Notes on Number Systems) - MattConn.io</title>
   <meta name="author" content="Matthew Connelly">
 
   
-  <meta name="description" content="A brief overview of the GSAP JavaScript library and the animation power it brings to your frontend arsenal that CSS3 can't.">
+  <meta name="description" content="Your name (or any word) can be converted to a decimal number. Take my name. This could be read as a base-36 number: $ \ \mathrm{matthew}_{36} $ While &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://mattconn.io/blog/2016/05/12/animating-with-greensock/">
+  <link rel="canonical" href="http://mattconn.io/blog/2018/05/31/your-name-as-a-number/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="MattConn.io" type="application/atom+xml">
@@ -106,7 +106,7 @@ MathJax.Hub.Config({
   
   <header>
     
-      <h1 class="entry-title">Animating With GreenSock</h1>
+      <h1 class="entry-title">Your Name as a Number in Base-36 and Decimal (Some Notes on Number Systems)</h1>
     
     
       <p class="meta">
@@ -115,31 +115,73 @@ MathJax.Hub.Config({
 
 
 
-<time class='entry-date' datetime='2016-05-12T00:00:00-04:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2018-05-31T08:39:58-04:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2018</span></span> <span class='time'>8:39 am</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><i>Originally written for <a href="https://thecharlesnyc.com/unordered-list/green-sock" target="_blank">The Charles NYC</a>.</i></p>
+<div class="entry-content"><p>Your name (or any word) can be converted to a decimal number.</p>
 
-<p>I’ve recently been introduced to animating with the powerful JavaScript library GreenSock. It’s quite impressive, notably for how manageable its animations are. Unlike CSS3, which measures its animations with percentages, GreenSock uses seconds for timing. GreenSock is also capable of applying multiple animations to a single element, each running either consecutively or simultaneously, which is something CSS3 is not capable of either.</p>
+<p>Take my name. This could be read as a base-36 number: $ \  \mathrm{matthew}_{36} $</p>
 
-<!--more-->
+<p>While base-36 may sound unusual, it is just a number system that follows the same rules as any other; for any base $b$, the largest digit that can be represented before having to carry is $b-1$.</p>
 
-<p>The real beauty of GreenSock is how much control it affords. Much like the animations they control, tweens (the animations between two keyframes) can be controlled with a timeline. This is essentially a container for tweens, and timelines themselves can be nested in other timelines, affording even more control.</p>
+<p>For example, in decimal (base-10), we can count up to 9, but once we reach 10 (the base), we reset the current digit back to 0 and carry the 1. A base-36 number system would obey the same rules; once we count up to 35 ($b-1$), counting any futher would require a digit carry until we reach 35 again.</p>
 
-<p>After building out a complex sequence of animations, you’ll find GreenSock’s afforded control becomes especially important when changing the animation or timing of your sequence. Whether it be within a single tween or an entire timeline, making changes is easy and painless, and will not affect adjacent animations.</p>
+<p>We would use base-36 because we need enough room in the number system for digits 0-9 and the digits for the letters of the alphabet (A-Z, which will represent decimal values 10-26); the sum of these bases (10+26) gives us our new base: 36.</p>
 
-<iframe height="265" scrolling="no" title="Greensock Pacman, Nested Timelines" src="//codepen.io/mattConn/embed/preview/aNZggN/?height=265&amp;theme-id=0&amp;default-tab=css,result&amp;embed-version=2" frameborder="no" allowtransparency="true" allowfullscreen="true" style="width: 100%;">See the Pen <a href="https://codepen.io/mattConn/pen/aNZggN/">Greensock Pacman, Nested Timelines</a> by Matthew Connelly (<a href="https://codepen.io/mattConn">@mattConn</a>) on <a href="https://codepen.io">CodePen</a>.
-</iframe>
+<p>As can be seen in hexadecimal (base-16), a number system that extends beyond base-10 will use letters to represent numeric values; the number 10 is A, 11 is B, and so on up to F for 15. Our base-36 number system will also have this property, only extending to 35, which will be represented by Z.</p>
 
-<p>Using GreenSock, I made a brief animation (above) detailing the interaction between PacMan and a ghost. To create these two characters, I styled and positioned multiple divs, essentially “building” them. To make them “interact,” I placed all of their actions (tweens) into their own respective timelines in order to control the timing of each action.</p>
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{array}{c|c}
+\text{Base-10} & \text{Base-36} \\
+\hline
+0 & 0 \\
+\vdots & \vdots \\ 
+9 & 9 \\
+10 & \mathrm{A} \\
+11 & \mathrm{B} \\
+12 & \mathrm{C} \\
+\vdots & \vdots \\ 
+33 & \mathrm{X} \\
+34 & \mathrm{Y} \\
+35 & \mathrm{Z} \\
+\end{array} %]]></script>
 
-<p>For example: to animate PacMan biting, there is a rotation tween on PacMan’s upper and lower jaw. These two tweens are both timed to occur simultaneously within a timeline. This timeline, containing all of Pacman’s animations, is then nested in my master timeline. This timeline is then timed to happen first, with my ghost’s timeline timed to happen shortly after.</p>
+<p>We’re treating these letters as though they were digits (which they are now). Above is a table of base-10 numbers and their base-36 representation; a double-digit base-10 number can fit in a single base-36 digit.</p>
 
-<p>The learning curve for animating with GreenSock was relatively low with all the available resources online. GreenSock has their own active forum where often the creator of GreenSock himself answers questions in detail with code examples or an occasional proof of concept on Codepen. I’m excited to be working more in-depth with GreenSock in the future. In the absence of Flash, GreenSock seems to be the runner-up as the standard for creating engaging animations on the web.</p>
+<p>If you want to convert your name or a word from base-36 to base-10 yourself, you can try the small REPL below that simply uses javaScript’s <code>parseInt(string, base)</code> function, which takes a string and converts it to an integer in a given base.</p>
+<p data-height="233" data-theme-id="0" data-slug-hash="NzqBOO" data-default-tab="result" data-user="mattConn" data-embed-version="2" data-pen-title="Name to Base-10" class="codepen">See the Pen <a href="https://codepen.io/mattConn/pen/NzqBOO/">Name to Base-10</a> by Matthew Connelly (<a href="https://codepen.io/mattConn">@mattConn</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async="" src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<p><br />
+Converting the letters in my name from base-36 to base-10 yields:</p>
+
+<script type="math/tex; mode=display">[\mathrm{m,a,t,t,h,e,w}]_{36} \ = \ [22,10,29,29,17,14,32]_{10}</script>
+
+<p>Then, to concatenate these base-10 digits, take the following sum:</p>
+
+<script type="math/tex; mode=display">(22\cdot36^6) + (10\cdot36^5) + (29\cdot36^4) + (29\cdot36^3)+(17\cdot36^2)+(14\cdot36^1)+(32\cdot36^0)</script>
+
+<script type="math/tex; mode=display">\implies \mathrm{matthew}_{36} \ = \ 48543957608_{10}</script>
+
+<p>(Aside from being neat, this could make for some simple obfuscation).</p>
+
+<p>We take this sum because a number in any base $b$ incorporating some digit(s) $n$ is represented as the following:</p>
+
+<script type="math/tex; mode=display">\underbrace{\dots (n\cdot b^3)+(n\cdot b^2)+(n\cdot b^1)+(n\cdot b^0)}_{integer}\underbrace{.}_{point}\underbrace{(n\cdot b^{-1})+ (n \cdot b^{-2}) + (n \cdot b^{-3}) + (n \cdot b^{-4}) \dots}_{rational}</script>
+
+<p>When we multiply a digit by a base to some power, this power sets the position of the digit. We can concatenate any digits we want using this property of number systems, as well as extract them and chop off trailing digits (truncation).</p>
+
+<p>For example, for some arbitrary base-10 number, 215.25 (the price of a textbook maybe):</p>
+
+<script type="math/tex; mode=display">215.25 \ = \ (2\cdot10^2) + (1 \cdot 10^1) + (5\cdot10^0) + (2\cdot10^{-1})+(5\cdot10^{-2})</script>
+
+<p>Or for some base-36 number that looks like the word “hello”:</p>
+
+<script type="math/tex; mode=display">\mathrm{hello} \ = \ (\mathrm{h} \cdot36^4)+(\mathrm{e}\cdot36^3)+(\mathrm{l}\cdot36^2)+(\mathrm{l}\cdot36^1)+(\mathrm{o}\cdot36^0)</script>
 </div>
 
 
@@ -155,12 +197,12 @@ MathJax.Hub.Config({
 
 
 
-<time class='entry-date' datetime='2016-05-12T00:00:00-04:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2018-05-31T08:39:58-04:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2018</span></span> <span class='time'>8:39 am</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/web-development/'>web development</a>
+    <a class='category' href='/blog/categories/mathematics/'>mathematics</a>
   
 </span>
 
@@ -169,7 +211,7 @@ MathJax.Hub.Config({
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://mattconn.io/blog/2016/05/12/animating-with-greensock/" data-via="" data-counturl="http://mattconn.io/blog/2016/05/12/animating-with-greensock/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://mattconn.io/blog/2018/05/31/your-name-as-a-number/" data-via="" data-counturl="http://mattconn.io/blog/2018/05/31/your-name-as-a-number/" >Tweet</a>
   
   
   
@@ -178,8 +220,8 @@ MathJax.Hub.Config({
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2018/05/01/pattern-in-quotients-of-seven-and-pi/" title="Previous Post: A Pattern in Quotients of Seven and Rational Pi">&laquo; A Pattern in Quotients of Seven and Rational Pi</a>
       
-        <a class="basic-alignment right" href="/blog/2016/08/28/custom-addthis-setup/" title="Next Post: Quick and Custom AddThis Setup">Quick and Custom AddThis Setup &raquo;</a>
       
     </p>
   </footer>
@@ -249,8 +291,8 @@ MathJax.Hub.Config({
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://mattconn.io/blog/2016/05/12/animating-with-greensock/';
-        var disqus_url = 'http://mattconn.io/blog/2016/05/12/animating-with-greensock/';
+        var disqus_identifier = 'http://mattconn.io/blog/2018/05/31/your-name-as-a-number/';
+        var disqus_url = 'http://mattconn.io/blog/2018/05/31/your-name-as-a-number/';
         var disqus_script = 'embed.js';
       
     (function () {
