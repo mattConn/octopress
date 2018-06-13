@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Web Development | MattConn.io]]></title>
+  <link href="http://mattconn.io/blog/categories/web-development/atom.xml" rel="self"/>
+  <link href="http://mattconn.io/"/>
+  <updated>2018-06-13T01:54:36-04:00</updated>
+  <id>http://mattconn.io/</id>
+  <author>
+    <name><![CDATA[Matthew Connelly]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Extra Steps Needed for Setting Up Octopress With GitHub Pages]]></title>
+    <link href="http://mattconn.io/blog/2018/04/20/extra-steps-needed-for-setting-up-octopress-github-pages/"/>
+    <updated>2018-04-20T00:51:16-04:00</updated>
+    <id>http://mattconn.io/blog/2018/04/20/extra-steps-needed-for-setting-up-octopress-github-pages</id>
+    <content type="html"><![CDATA[<p>Having to set up Octopress to use with GitHub pages again, I realized there are a few extra steps I needed to perform that weren’t in the <a href="http://octopress.org/docs/">default instructions</a> on the octopress website.</p>
+
+<!--more-->
+
+<h2 id="create-a-new-branch">Create a new branch</h2>
+<p>Create a new branch after forking the octopress repository; this new branch will be the one you work out of, as the deploy rake task deploys to the master branch (you will need to pull and merge on every commit if you do not do this).</p>
+
+<h2 id="if-your-deploy-is-rejected">If your deploy is rejected</h2>
+<p>If your deploy is rejected, you will need to change to the <code>_deploy</code> directory and <code>git pull origin master</code>, then try deploying again. If on <code>git pull origin master</code> you receive an error of <code>fatal: refusing to merge unrelated histories</code>, try <code>git pull origin master --allow-unrelated-histories</code>, and that should work.</p>
+
+<h2 id="if-you-are-using-a-domain-cname-issue">If you are using a domain (CNAME issue)</h2>
+<p>If you are using a domain, your <code>CNAME</code> file will need to be in the <code>source</code> directory if you want it to be in the top-level directory (as it will need to be) of your master branch, which is the only branch a personal (non-project) GitHub Pages repo will serve.</p>
+
+<p>And that’s really it. Not too many, but enough to prompt me to make a new post.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hosting Git Repos With a Web Frontend]]></title>
+    <link href="http://mattconn.io/blog/2017/08/02/hosting-git-repos-with-a-web-frontend/"/>
+    <updated>2017-08-02T00:21:17-04:00</updated>
+    <id>http://mattconn.io/blog/2017/08/02/hosting-git-repos-with-a-web-frontend</id>
+    <content type="html"><![CDATA[<p>Hosting your git repositories yourself is as simple as <code>git init --bare</code> (or <code>git clone --bare</code> for existing repos) in a directory on your server, and then adding the remote to your local repo: <code>git remote add myServer ssh://me@server.address/path/to/repo/project.git</code>.</p>
+
+<p>Having your repos on GitHub too makes for a nice redundancy (or on any other git server), and a remote on your server, on GitHub and a local copy makes for three redundancies. You can push to multiple remotes by adding a few lines in your project’s git config.</p>
+
+<!--more-->
+
+<p>In your local copy of the repo, edit <code>.git/config</code> and add a new block:</p>
+
+<pre><code>[remote "all"]
+    url = ssh://me@server.address/path/to/repo/project.git
+    url = git@github.com:me/project
+</code></pre>
+
+<p>That would be the url for your server and for GitHub’s. And so now when you’re ready to push, <code>git push all &lt;branch_name&gt;</code> will push your changes to both repositories. It should be noted that you can name this remote whatever you want.</p>
+
+<h2 id="installing-gitlist-for-a-git-web-interface-and-troubleshooting">Installing GitList for a Git Web Interface (and Troubleshooting)</h2>
+
+<h4 id="using-nginx-server-on-debian-9">(Using Nginx server on Debian 9)</h4>
+
+<p>For a nice way to show your code and commits much like GitHub does, there are many <a href="https://git.wiki.kernel.org/index.php/Interfaces,_frontends,_and_tools#Web_Interfaces">git web interfaces</a> out there, but I chose <a href="http://gitlist.org/">GitList</a> because it looked pretty good and seemed pretty easy to set up.</p>
+
+<p>I used Nginx for my server, so I followed GitList’s <code>INSTALL.md</code> instructions for Nginx, copying their provided configuration.<br />
+Here are some issues I encountered and their solutions:</p>
+
+<h2 id="getting-a-500-error-when-trying-to-view-repos">Getting a 500 error when trying to view repos:</h2>
+
+<p>Assuming you’re using php-fpm, you’ll need to note the address in GitList’s Nginx config, within the php location block, listed as <code>fastcgi_pass</code>:</p>
+
+<pre><code>location ~ ^/index.php.$ {
+    fastcgi_pass 127.0.0.1:9000;
+}
+</code></pre>
+
+<p>Then open <code>/etc/php/7.0/fpm/pool.d/www.conf</code> and find the line <code>listen = /run/php/php7.0-fpm.sock</code>; here you’re going to change the listed socket to the address in our Nginx location block above so that it reads as: <code>listen = 127.0.0.1:9000</code>.</p>
+
+<p>After restarting php-fpm, you should no longer receive a 500 error when viewing repos.</p>
+
+<h2 id="getting-blank-screen-500-error-when-trying-to-view-commits">Getting blank screen (500 error) when trying to view commits:</h2>
+
+<p>This error persisted for a bit longer than the above for me, but looking at the error log (always check the error log!), I noticed this:</p>
+
+<pre><code>FastCGI sent in stderr: “PHP message: PHP Fatal error:  Uncaught Error: Class ‘SimpleXmlIterator’ not found in /var/www/gitlist/vendor/klaussilveira/gitter/lib/Gitter/PrettyFormat.php:22
+</code></pre>
+
+<p>Searching for <code>‘SimpleXmlIterator’ not found</code> online lead me to find that I needed to install <code>php7.0-xml</code>, which I was able to do with apt-get, which solved the issue.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Game Development - Text-based Level Editing and Phaser JS]]></title>
+    <link href="http://mattconn.io/blog/2017/04/07/text-based-level-editing-phaser-js/"/>
+    <updated>2017-04-07T00:00:00-04:00</updated>
+    <id>http://mattconn.io/blog/2017/04/07/text-based-level-editing-phaser-js</id>
+    <content type="html"><![CDATA[<p>If you are familiar with roguelikes (turn-based dungeon crawlers) such as Nethack, then you are no doubt familiar with the idea of a game’s elements being displayed entirely as ASCII characters.</p>
+
+<p>Here I will explain how I use a similar approach to create the layout of rooms in a game I am working on and how I use Phaser (JS game engine) to render the rooms based on my layouts.</p>
+
+<!--more-->
+
+<p>The following array of strings represents a single room:</p>
+
+<p><code>
+   [
+    //1         12             25
+    'ppppppppppppppppppppppppp',//1
+    'p------------------------',//2
+    'p------------------------',//3
+    'pppppppppp---------------',//4
+    'p----------------E-------',//5
+    'p--------------pppppppppp',//6
+    'p------------------------',//7
+    'p------E-E---------------',//8
+    'pppppppppp---------------',//9
+    'p------------------------',//10
+    'p----------------E-E-E---',//11
+    'p--------------pppppppppp',//12
+    'p-----------------------p',//13
+    'p-----------------------p',//14
+    'p-----------ppppppppppppp',//15
+    'p---------ppppppppppppppp',//16
+    'p------pppppppppppppppppp',//17
+    'ppppppppppppppppppppppppp',//18
+    'ppppppppppppppppppppppppp' //19
+    ]
+</code></p>
+
+<p>“E” represents an enemy, and “p” represents an immovable block that can be used as a platform or wall. A dash represents empty space, simply because I find it easier to read than whitespace, although I am not exactly counting dashes to find any kind of distance.</p>
+
+<p>The commented-out numbers on top and on the right represent columns and rows respectively; I have divided a canvas 800 pixels wide and 600 pixels high into 25-by-19 32-pixel squares.</p>
+
+<h3 id="how-and-when-a-room-is-rendered">How and when a room is rendered</h3>
+<ol>
+  <li>
+    <p>The player collides with the edge of the world (canvas)</p>
+  </li>
+  <li>
+    <p>The player’s x-position is then changed to the position of the edge opposite of the collision (right edge collision, player moved to far-left of canvas; left edge collision, player moved to far-right of canvas); this gives the appearance of entering a new room</p>
+  </li>
+  <li>
+    <p>The room is then cleared, using Phaser’s <code>sprite.kill()</code> method</p>
+  </li>
+  <li>A variable integer is then increased or decreased by 1 depending on the edge of collision (right, +1; left, -1), and this integer is then used as our room’s index in our level array.
+    <ul>
+      <li>So if our current room’s index is 0 (the first room in the level array), and the player collides with the right edge of the canvas, our integer increases to 1, and we render the room who’s index is 1 (our second room in the level array)</li>
+    </ul>
+  </li>
+  <li>
+    <p>After getting the room we want by index, we check each string within the room array; each of these strings can be looked at as a row of things that can be rendered onto the canvas, from the top of the canvas to the bottom.</p>
+  </li>
+  <li>
+    <p>For each row (string) in the room array, we check each character by its index using <code>String.charAt()</code>.</p>
+  </li>
+  <li>Using a switch statement, the character can be matched to a case; if and after being matched, we will call Phaser’s <code>group.create()</code> method to render the matched sprite or image.</li>
+</ol>
+
+<p>So using the room layout above, <code>level1[0][8].charAt(4)</code> would match a case of <code>p</code> in our switch statement:
+	- 0 is the index of the room (it is the only room shown, but typically there would be multiple rooms), 8 is the index of the row, and the 4th character of the 8th row is a <code>p</code>.</p>
+
+<h3 id="the-room-rendering-function-abridged">The room-rendering function (abridged)</h3>
+<p>(To be called on collision.)</p>
+
+<p><code>
+function renderRoom(room){
+    for(var row in room){
+        for(var column=0; column &lt;=  room[row].length; column++){
+            switch (room[row].charAt(column)){
+                case 'p':
+                    platform = platforms.create(column*32, row*32, 'platform-image');
+                    break;
+            }
+        }
+    }
+}
+</code><br />
+This room-rendering function currently only works with one level but should scale to accommodate multiple levels and work similarly if not identically.</p>
+
+<p>The room system works as detailed in pseudo-code below, with each “column” actually representing a single character in a string:</p>
+
+<p><code>
+level1 [
+	room1 [ 
+		row1 'column1 column2 column3',
+		row2 'column1 column2 column3',
+		row3 'column1 column2 column3'
+	],
+	room2 [ 
+		row1 'column1 column2 column3',
+		row2 'column1 column2 column3',
+		row3 'column1 column2 column3'
+	]
+]
+</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Parsing In-line PHP With Nginx]]></title>
+    <link href="http://mattconn.io/blog/2017/01/02/nginx-php-parsing-in-html/"/>
+    <updated>2017-01-02T00:00:00-05:00</updated>
+    <id>http://mattconn.io/blog/2017/01/02/nginx-php-parsing-in-html</id>
+    <content type="html"><![CDATA[<h3 id="my-environment">My Environment</h3>
+<ul>
+  <li>Nginx version
+    <ul>
+      <li>1.10.0</li>
+    </ul>
+  </li>
+  <li>PHP version
+    <ul>
+      <li>7.0</li>
+    </ul>
+  </li>
+  <li>FastCGI processor
+    <ul>
+      <li>php7.0-fpm</li>
+    </ul>
+  </li>
+  <li>Kernel
+    <ul>
+      <li>Ubuntu 16.04</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="the-first-and-more-obvious-step">The First And More Obvious Step</h2>
+
+<p>To enable parsing of PHP in HTML files, editing a server block’s location block to include files with an HTML extension should be sufficient.<br />
+<!--more-->
+For example:</p>
+
+<p><code>
+# /etc/nginx/sites-available/mywebsite.com
+location ~ \.(php|html)$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+}
+</code></p>
+
+<p>However, since I am working with PHP 7, whose full name is “php7.0” (which is usefully descriptive but makes things tricky when initially looking for related directories or daemons), I had an extra step in order to make this work. And apparently, all PHP versions, from late php5.* to php7.0, will require this extra step.</p>
+
+<h2 id="the-final-and-not-so-obvious-step">The Final And Not-So-Obvious Step</h2>
+
+<p>You’ll now have to edit <code>php-fpm.conf</code>, or preferrably one of its included files; namely, <code>www.conf</code>.<br />
+For me, <code>php-fpm.conf</code> lives at <code>/etc/php/7.0/</code>, with <code>www.conf</code> in directory <code>pool.d</code>.</p>
+
+<p>The line we are looking for in <code>www.conf</code> (or the line you can add to <code>php-fpm.conf</code> if you want) is <code>security.limit_extensions</code>, which, in conjunction with our Nginx configuration, will permit our specified file types to be parsed as PHP. You may have to uncomment it, and for me it read as such by default:</p>
+
+<p><code>security.limit_extensions = .php .php3 .php4 .php5 .php7</code></p>
+
+<p>Here we can add <code>.html</code> or <code>.htm</code>, or even <code>.js</code> (but then we’d have to add <code>.js</code> to our Nginx location block as we did with <code>.html</code> earlier).</p>
+
+<p>Finally, we must now restart the php-fpm daemon, and of course, our Nginx server, for all changes to take effect.</p>
+
+<p>For me, signaling Nginx to reload works:<br />
+<code>nginx -s reload</code><br />
+(You will need root permissions for this.)</p>
+
+<p>For php-fpm, I use the service wrapper:<br />
+<code>service php7.0-fpm restart</code><br />
+(Root permissions needed again.)</p>
+
+<p>Now you should be all set to write in-line PHP in HTML files, or even JavaScript files, if your heart so desires.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Chromebook Web Development]]></title>
+    <link href="http://mattconn.io/blog/2016/12/17/chromebook-web-development/"/>
+    <updated>2016-12-17T00:00:00-05:00</updated>
+    <id>http://mattconn.io/blog/2016/12/17/chromebook-web-development</id>
+    <content type="html"><![CDATA[<h2 id="quick-rundown">Quick Rundown</h2>
+<ul>
+  <li><strong>Machine:</strong>
+    <ul>
+      <li>Samsung Chromebook 3</li>
+    </ul>
+  </li>
+  <li><strong>Environment:</strong>
+    <ul>
+      <li>ChromeOS for a GUI and native drivers</li>
+      <li>Lubuntu for server-side programs and scripts (treated as headless)</li>
+    </ul>
+  </li>
+  <li><strong>Text Editor/IDE</strong>
+    <ul>
+      <li><a href="https://chrome.google.com/webstore/detail/caret-t/agiednhnlghobdgpgfdnbdaflnngmoij?hl=en">Caret-T</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>I recently purchased a Samsung Chromebook 3 so I could work on projects during my long commute or at my local coffee shop without worrying about losing or breaking my other more expensive portable machine. It’s really nice and light, and with a little configuration, makes for a great portable web development environemnt. After all, ChromeOS is itself a linux distro, but things are a little hidden in this environment as ChromeOS is meant to be easily accessible and to leave the user as little room as possible to screw things up.</p>
+
+<!--more-->
+
+<h2 id="first-enable-developer-mode">First, Enable Developer Mode</h2>
+<p><a href="http://www.howtogeek.com/210817/how-to-enable-developer-mode-on-your-chromebook/">Enabling developer mode</a> is very easy and necessary to get things started. This will allow you to access ChromeOS’s native shell, or “Crosh”, which runs in Chrome as an extension which is really cool; ctrl+alt+t will bring you there. From Crosh, we can then access our typical unix shell by simply typing “shell.”</p>
+
+<p>But now lets say we want another distro to run along side ChromeOS?</p>
+
+<h2 id="creating-a-chroot-for-running-another-distro">Creating A Chroot For Running Another Distro</h2>
+<p>A chroot, or change root, gives us the ability to run this second distro, without partitioning the disk or using a virtual machine, while still being able to access the same files across both environments. I installed LXDE because the Chromebook I purchased had only 2 gigs of RAM, and used <a href="https://github.com/dnschneid/crouton">Crouton</a> to create the chroot.</p>
+
+<p>This second distro is nice because if you are familiar with the Linux environment, you can proceed to work as you normally would, with Aptitude, Python, PHP and everyhing else already installed, and without all the limitations of ChromeOS.</p>
+
+<h2 id="chromeos-is-still-very-nice-and-an-integral-part-of-this-setup">ChromeOS Is Still Very Nice, And An Integral Part Of This Setup</h2>
+<p>ChromeOS makes for a very friendly desktop environment despite the red tape, and handles keyboard and trackpad input with its native drivers; I access the chroot via terminal to run scripts and install programs, but work with the ChromeOS GUI. For a text editor, I use <a href="https://chrome.google.com/webstore/detail/caret-t/agiednhnlghobdgpgfdnbdaflnngmoij?hl=en">Caret-T</a>, which is installed as a Chrome extension, and comes with intellisense-like auto-completion for JavaScript.</p>
+]]></content>
+  </entry>
+  
+</feed>

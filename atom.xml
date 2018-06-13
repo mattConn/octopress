@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[MattConn.io]]></title>
+  <link href="http://mattconn.io/atom.xml" rel="self"/>
+  <link href="http://mattconn.io/"/>
+  <updated>2018-06-13T01:54:36-04:00</updated>
+  <id>http://mattconn.io/</id>
+  <author>
+    <name><![CDATA[Matthew Connelly]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Your Name as a Number in Base-36 (Some Notes on Number Systems)]]></title>
+    <link href="http://mattconn.io/blog/2018/05/31/your-name-as-a-number/"/>
+    <updated>2018-05-31T08:39:58-04:00</updated>
+    <id>http://mattconn.io/blog/2018/05/31/your-name-as-a-number</id>
+    <content type="html"><![CDATA[<p>Your name (or any word) can be converted to a decimal number.</p>
+
+<p>Take my name. This could be read as a base-36 number: $ \  \mathrm{matthew}_{36} $</p>
+
+<p>While base-36 may sound unusual, it is just a number system that follows the same rules as any other; for any base $b$, the largest digit that can be represented before having to carry is $b-1$.</p>
+
+<p>For example, in decimal (base-10), we can count up to 9, but once we reach 10 (the base), we reset the current digit back to 0 and carry the 1. A base-36 number system would obey the same rules; once we count up to 35 ($b-1$), counting any further would require a digit carry until we reach 35 again.</p>
+
+<!--more-->
+
+<p>We would use base-36 because we need enough room in the number system for digits 0-9 and the digits for the letters of the alphabet (A-Z, which will represent decimal values 10-26); the sum of these bases (10+26) gives us our new base: 36.</p>
+
+<p>As can be seen in hexadecimal (base-16), a number system that extends beyond base-10 will use letters to represent numeric values; the number 10 is A, 11 is B, and so on up to F for 15. Our base-36 number system will also have this property, only extending to 35, which will be represented by Z.</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{array}{c|c}
+\text{Base-10} & \text{Base-36} \\
+\hline
+0 & 0 \\
+\vdots & \vdots \\ 
+9 & 9 \\
+10 & \mathrm{A} \\
+11 & \mathrm{B} \\
+12 & \mathrm{C} \\
+\vdots & \vdots \\ 
+33 & \mathrm{X} \\
+34 & \mathrm{Y} \\
+35 & \mathrm{Z} \\
+\end{array} %]]&gt;</script>
+
+<p>We’re treating these letters as though they were digits (which they are now). Above is a table of base-10 numbers and their base-36 representation; a double-digit base-10 number can fit in a single base-36 digit.</p>
+
+<p>If you want to convert your name or a word from base-36 to base-10 yourself, you can try the small REPL below that simply uses javaScript’s <code>parseInt(string, base)</code> function, which takes a string and converts it to an integer in a given base.</p>
+<p data-height="233" data-theme-id="0" data-slug-hash="NzqBOO" data-default-tab="result" data-user="mattConn" data-embed-version="2" data-pen-title="Name to Base-10" class="codepen">See the Pen <a href="https://codepen.io/mattConn/pen/NzqBOO/">Name to Base-10</a> by Matthew Connelly (<a href="https://codepen.io/mattConn">@mattConn</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async="" src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<p><br />
+Converting the letters in my name from base-36 to base-10 yields:</p>
+
+<script type="math/tex; mode=display">[\mathrm{m,a,t,t,h,e,w}]_{36} \ = \ [22,10,29,29,17,14,32]_{10}</script>
+
+<p>Then, to concatenate these base-10 digits, take the following sum:</p>
+
+<script type="math/tex; mode=display">(22\cdot36^6) + (10\cdot36^5) + (29\cdot36^4) + (29\cdot36^3)+(17\cdot36^2)+(14\cdot36^1)+(32\cdot36^0)</script>
+
+<script type="math/tex; mode=display">\implies \mathrm{matthew}_{36} \ = \ 48543957608_{10}</script>
+
+<p>(Aside from being neat, this could make for some simple obfuscation).</p>
+
+<p>We take this sum because a number in any base $b$ incorporating some digit(s) $n$ is represented as the following:</p>
+
+<script type="math/tex; mode=display">\underbrace{\dots (n\cdot b^3)+(n\cdot b^2)+(n\cdot b^1)+(n\cdot b^0)}_{integer}\underbrace{.}_{point}\underbrace{(n\cdot b^{-1})+ (n \cdot b^{-2}) + (n \cdot b^{-3}) + (n \cdot b^{-4}) \dots}_{rational}</script>
+
+<p>When we multiply a digit by a base to some power, this power sets the position of the digit. We can concatenate any digits we want using this property of number systems, as well as extract them and chop off trailing digits (truncation).</p>
+
+<p>For example, for some arbitrary base-10 number, 215.25 (the price of a textbook maybe):</p>
+
+<script type="math/tex; mode=display">215.25 \ = \ (2\cdot10^2) + (1 \cdot 10^1) + (5\cdot10^0) + (2\cdot10^{-1})+(5\cdot10^{-2})</script>
+
+<p>Or for some base-36 number that looks like the word “hello”:</p>
+
+<script type="math/tex; mode=display">\mathrm{hello} \ = \ (\mathrm{h} \cdot36^4)+(\mathrm{e}\cdot36^3)+(\mathrm{l}\cdot36^2)+(\mathrm{l}\cdot36^1)+(\mathrm{o}\cdot36^0)</script>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A Pattern in Quotients of Seven and Rational Pi]]></title>
+    <link href="http://mattconn.io/blog/2018/05/01/pattern-in-quotients-of-seven-and-pi/"/>
+    <updated>2018-05-01T08:39:58-04:00</updated>
+    <id>http://mattconn.io/blog/2018/05/01/pattern-in-quotients-of-seven-and-pi</id>
+    <content type="html"><![CDATA[<script type="math/tex; mode=display">\frac{1}{7} \ = \ 0.\overline{142857}</script>
+
+<p>A quotient of seven will always have this repeating pattern in the mantissa (the fractional portion beyond the decimal point). This pattern also “shifts” a certain predictable amount of digits every division. We could also think of a quotient of seven as a circular queue, with its mantissa “wrapping around”, like a speedometer or certain type of combination lock.</p>
+
+<!--more-->
+
+<p>For every seven quotients, we can see the number of digit shifts (or rotations, in terms of the queue/lock comparison) repeats, marked in the table below of 14 quotients of 7, in the column labeled “offset from 1/7” and underlined in the “decimal” column:</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{array}{c|l|c}
+\text{Quotient} & \text{Decimal} & \text{Offset from} \ \frac{1}{7} \\
+\hline
+1/7 & 0.14285714285714285 & 0 \\
+2/7 & 0.\underline{2857}142857142857 & 4 \\
+3/7 & 0.\underline{42857}142857142855 & 5 \\
+4/7 & 0.\underline{57}14285714285714 & 2 \\
+5/7 & 0.\underline{7}142857142857143 & 1 \\
+6/7 & 0.\underline{857}1428571428571 & 3 \\
+7/7 & 1.0 & 0 \\
+8/7 & 1.1428571428571428 & 0 \\
+9/7 & 1.\underline{2857}142857142858 & 4 \\
+10/7 & 1.\underline{42857}14285714286 & 5 \\
+11/7 & 1.\underline{57}14285714285714 & 2 \\
+12/7 & 1.\underline{7}142857142857142 & 1 \\
+13/7 & 1.\underline{857}1428571428572 & 3 \\
+14/7 & 2.0 & 0 \\
+\end{array} %]]&gt;</script>
+
+<p>Concatenating these offsets, you get the number:</p>
+
+<script type="math/tex; mode=display">0452130</script>
+
+<p>As an integer, this number is evenly divisible by 7, which is interesting.</p>
+
+<script type="math/tex; mode=display">452130 \ \div \ 7 \ = \ 64590</script>
+
+<p>Here is the Julia script I wrote to find these offsets:</p>
+<figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+</pre></td><td class="code"><pre><code class=""><span class="line"># division by 7
+</span><span class="line"># =============
+</span><span class="line">
+</span><span class="line">master = string(1/7)
+</span><span class="line">
+</span><span class="line">println("quotient, decimal, and offset from 1/7:")
+</span><span class="line">
+</span><span class="line">last = '\0'
+</span><span class="line">for i in 1:100
+</span><span class="line">	current = string(i/7)
+</span><span class="line">	last = current
+</span><span class="line">
+</span><span class="line">	point = false # decimal point detection
+</span><span class="line">	cindex = 1 # character index of quotient string current (1-indexed)
+</span><span class="line">	
+</span><span class="line">	# find decimal point to ignore
+</span><span class="line">	while !point
+</span><span class="line">		if current[cindex] == '.'
+</span><span class="line">			point = true
+</span><span class="line">		end
+</span><span class="line">
+</span><span class="line">		cindex += 1
+</span><span class="line">	end
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">	# count offset from master quotient
+</span><span class="line">	masterOffset = 0
+</span><span class="line">	while current[cindex] != master[3] &amp;&amp; cindex &lt; length(current)
+</span><span class="line">		masterOffset += 1
+</span><span class="line">		cindex +=1
+</span><span class="line">	end
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">	println(i,"/7 : ",current, " : ", masterOffset)
+</span><span class="line">
+</span><span class="line">end</span></code></pre></td></tr></table></div></figure>
+
+<h2 id="a-quotient-of-seven-as-a-bad-rational-approximation-of-pi">A Quotient of Seven as a Bad Rational Approximation of Pi</h2>
+
+<script type="math/tex; mode=display">\frac{22}{7} \ = \ 3.142857142857143</script>
+
+<p>This is one of the smaller rational approximations of pi, and it is a bad one; not because it only gets you two digits of pi (or pi rounded to one thousandth), but because it relates more to the nature of division by seven than to the nature of pi.<br />
+<br />
+Looking at the table shown earlier, quotients 1/7, then 8/7, both have the same mantissa as 22/7. We can then see that we can pick the offset from 1/7 that we want (from the available offsets 0, 4, 5, 2, 1 and 3), knowing the nature of division by 7, which can be modeled by an expression like the one below, the braces denoting the fractional part.</p>
+
+<script type="math/tex; mode=display">\left \{ \frac{(7 \cdot n) \ + k}{7} \right \}</script>
+
+<p>Here, n denotes some integral value that will give us a multiple of seven, with k denoting an increase in this multiple necessary to give us a mantissa after division by seven.<br />
+Then if we wanted to design a rational number that looked something like pi, we could consider that 1/7 has the digits 1 and 4 at the beginning of its mantissa. All that’s left would be the integer 3 in front. Using the expression above, we would wind up with:</p>
+
+<script type="math/tex; mode=display">\left \{ \frac{(7 \cdot 3) \ + 1}{7} \right \}</script>
+
+<p>This gets us our integer 3 and the mantissa we want through an addition of 1. As seen in the table, the first division by 7 out of any 7 divisions will have a mantissa starting with 1 and 4.</p>
+
+<script type="math/tex; mode=display">\left \{ \frac{22}{7} \right \} \ = \ \left \{\frac{1}{7} \right \}</script>
+
+<p>If we wanted the next offset available (mantissa of 1/7 shifted 4 digits right) but the same integer part (3.0), we would use the same expression above, but add 2 instead of 1, to get the second offset, and so on.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Extra Steps Needed for Setting Up Octopress With GitHub Pages]]></title>
+    <link href="http://mattconn.io/blog/2018/04/20/extra-steps-needed-for-setting-up-octopress-github-pages/"/>
+    <updated>2018-04-20T00:51:16-04:00</updated>
+    <id>http://mattconn.io/blog/2018/04/20/extra-steps-needed-for-setting-up-octopress-github-pages</id>
+    <content type="html"><![CDATA[<p>Having to set up Octopress to use with GitHub pages again, I realized there are a few extra steps I needed to perform that weren’t in the <a href="http://octopress.org/docs/">default instructions</a> on the octopress website.</p>
+
+<!--more-->
+
+<h2 id="create-a-new-branch">Create a new branch</h2>
+<p>Create a new branch after forking the octopress repository; this new branch will be the one you work out of, as the deploy rake task deploys to the master branch (you will need to pull and merge on every commit if you do not do this).</p>
+
+<h2 id="if-your-deploy-is-rejected">If your deploy is rejected</h2>
+<p>If your deploy is rejected, you will need to change to the <code>_deploy</code> directory and <code>git pull origin master</code>, then try deploying again. If on <code>git pull origin master</code> you receive an error of <code>fatal: refusing to merge unrelated histories</code>, try <code>git pull origin master --allow-unrelated-histories</code>, and that should work.</p>
+
+<h2 id="if-you-are-using-a-domain-cname-issue">If you are using a domain (CNAME issue)</h2>
+<p>If you are using a domain, your <code>CNAME</code> file will need to be in the <code>source</code> directory if you want it to be in the top-level directory (as it will need to be) of your master branch, which is the only branch a personal (non-project) GitHub Pages repo will serve.</p>
+
+<p>And that’s really it. Not too many, but enough to prompt me to make a new post.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hosting Git Repos With a Web Frontend]]></title>
+    <link href="http://mattconn.io/blog/2017/08/02/hosting-git-repos-with-a-web-frontend/"/>
+    <updated>2017-08-02T00:21:17-04:00</updated>
+    <id>http://mattconn.io/blog/2017/08/02/hosting-git-repos-with-a-web-frontend</id>
+    <content type="html"><![CDATA[<p>Hosting your git repositories yourself is as simple as <code>git init --bare</code> (or <code>git clone --bare</code> for existing repos) in a directory on your server, and then adding the remote to your local repo: <code>git remote add myServer ssh://me@server.address/path/to/repo/project.git</code>.</p>
+
+<p>Having your repos on GitHub too makes for a nice redundancy (or on any other git server), and a remote on your server, on GitHub and a local copy makes for three redundancies. You can push to multiple remotes by adding a few lines in your project’s git config.</p>
+
+<!--more-->
+
+<p>In your local copy of the repo, edit <code>.git/config</code> and add a new block:</p>
+
+<pre><code>[remote "all"]
+    url = ssh://me@server.address/path/to/repo/project.git
+    url = git@github.com:me/project
+</code></pre>
+
+<p>That would be the url for your server and for GitHub’s. And so now when you’re ready to push, <code>git push all &lt;branch_name&gt;</code> will push your changes to both repositories. It should be noted that you can name this remote whatever you want.</p>
+
+<h2 id="installing-gitlist-for-a-git-web-interface-and-troubleshooting">Installing GitList for a Git Web Interface (and Troubleshooting)</h2>
+
+<h4 id="using-nginx-server-on-debian-9">(Using Nginx server on Debian 9)</h4>
+
+<p>For a nice way to show your code and commits much like GitHub does, there are many <a href="https://git.wiki.kernel.org/index.php/Interfaces,_frontends,_and_tools#Web_Interfaces">git web interfaces</a> out there, but I chose <a href="http://gitlist.org/">GitList</a> because it looked pretty good and seemed pretty easy to set up.</p>
+
+<p>I used Nginx for my server, so I followed GitList’s <code>INSTALL.md</code> instructions for Nginx, copying their provided configuration.<br />
+Here are some issues I encountered and their solutions:</p>
+
+<h2 id="getting-a-500-error-when-trying-to-view-repos">Getting a 500 error when trying to view repos:</h2>
+
+<p>Assuming you’re using php-fpm, you’ll need to note the address in GitList’s Nginx config, within the php location block, listed as <code>fastcgi_pass</code>:</p>
+
+<pre><code>location ~ ^/index.php.$ {
+    fastcgi_pass 127.0.0.1:9000;
+}
+</code></pre>
+
+<p>Then open <code>/etc/php/7.0/fpm/pool.d/www.conf</code> and find the line <code>listen = /run/php/php7.0-fpm.sock</code>; here you’re going to change the listed socket to the address in our Nginx location block above so that it reads as: <code>listen = 127.0.0.1:9000</code>.</p>
+
+<p>After restarting php-fpm, you should no longer receive a 500 error when viewing repos.</p>
+
+<h2 id="getting-blank-screen-500-error-when-trying-to-view-commits">Getting blank screen (500 error) when trying to view commits:</h2>
+
+<p>This error persisted for a bit longer than the above for me, but looking at the error log (always check the error log!), I noticed this:</p>
+
+<pre><code>FastCGI sent in stderr: “PHP message: PHP Fatal error:  Uncaught Error: Class ‘SimpleXmlIterator’ not found in /var/www/gitlist/vendor/klaussilveira/gitter/lib/Gitter/PrettyFormat.php:22
+</code></pre>
+
+<p>Searching for <code>‘SimpleXmlIterator’ not found</code> online lead me to find that I needed to install <code>php7.0-xml</code>, which I was able to do with apt-get, which solved the issue.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Game Development - Text-based Level Editing and Phaser JS]]></title>
+    <link href="http://mattconn.io/blog/2017/04/07/text-based-level-editing-phaser-js/"/>
+    <updated>2017-04-07T00:00:00-04:00</updated>
+    <id>http://mattconn.io/blog/2017/04/07/text-based-level-editing-phaser-js</id>
+    <content type="html"><![CDATA[<p>If you are familiar with roguelikes (turn-based dungeon crawlers) such as Nethack, then you are no doubt familiar with the idea of a game’s elements being displayed entirely as ASCII characters.</p>
+
+<p>Here I will explain how I use a similar approach to create the layout of rooms in a game I am working on and how I use Phaser (JS game engine) to render the rooms based on my layouts.</p>
+
+<!--more-->
+
+<p>The following array of strings represents a single room:</p>
+
+<figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">   [
+</span><span class="line">    //1         12             25
+</span><span class="line">    'ppppppppppppppppppppppppp',//1
+</span><span class="line">    'p------------------------',//2
+</span><span class="line">    'p------------------------',//3
+</span><span class="line">    'pppppppppp---------------',//4
+</span><span class="line">    'p----------------E-------',//5
+</span><span class="line">    'p--------------pppppppppp',//6
+</span><span class="line">    'p------------------------',//7
+</span><span class="line">    'p------E-E---------------',//8
+</span><span class="line">    'pppppppppp---------------',//9
+</span><span class="line">    'p------------------------',//10
+</span><span class="line">    'p----------------E-E-E---',//11
+</span><span class="line">    'p--------------pppppppppp',//12
+</span><span class="line">    'p-----------------------p',//13
+</span><span class="line">    'p-----------------------p',//14
+</span><span class="line">    'p-----------ppppppppppppp',//15
+</span><span class="line">    'p---------ppppppppppppppp',//16
+</span><span class="line">    'p------pppppppppppppppppp',//17
+</span><span class="line">    'ppppppppppppppppppppppppp',//18
+</span><span class="line">    'ppppppppppppppppppppppppp' //19
+</span><span class="line">    ]</span></code></pre></td></tr></table></div></figure>
+
+<p>“E” represents an enemy, and “p” represents an immovable block that can be used as a platform or wall. A dash represents empty space, simply because I find it easier to read than whitespace, although I am not exactly counting dashes to find any kind of distance.</p>
+
+<p>The commented-out numbers on top and on the right represent columns and rows respectively; I have divided a canvas 800 pixels wide and 600 pixels high into 25-by-19 32-pixel squares.</p>
+
+<h3 id="how-and-when-a-room-is-rendered">How and when a room is rendered</h3>
+<ol>
+  <li>
+    <p>The player collides with the edge of the world (canvas)</p>
+  </li>
+  <li>
+    <p>The player’s x-position is then changed to the position of the edge opposite of the collision (right edge collision, player moved to far-left of canvas; left edge collision, player moved to far-right of canvas); this gives the appearance of entering a new room</p>
+  </li>
+  <li>
+    <p>The room is then cleared, using Phaser’s <code>sprite.kill()</code> method</p>
+  </li>
+  <li>A variable integer is then increased or decreased by 1 depending on the edge of collision (right, +1; left, -1), and this integer is then used as our room’s index in our level array.
+    <ul>
+      <li>So if our current room’s index is 0 (the first room in the level array), and the player collides with the right edge of the canvas, our integer increases to 1, and we render the room who’s index is 1 (our second room in the level array)</li>
+    </ul>
+  </li>
+  <li>
+    <p>After getting the room we want by index, we check each string within the room array; each of these strings can be looked at as a row of things that can be rendered onto the canvas, from the top of the canvas to the bottom.</p>
+  </li>
+  <li>
+    <p>For each row (string) in the room array, we check each character by its index using <code>String.charAt()</code>.</p>
+  </li>
+  <li>Using a switch statement, the character can be matched to a case; if and after being matched, we will call Phaser’s <code>group.create()</code> method to render the matched sprite or image.</li>
+</ol>
+
+<p>So using the room layout above, <code>level1[0][8].charAt(4)</code> would match a case of <code>p</code> in our switch statement:
+	- 0 is the index of the room (it is the only room shown, but typically there would be multiple rooms), 8 is the index of the row, and the 4th character of the 8th row is a <code>p</code>.</p>
+
+<h3 id="the-room-rendering-function-abridged">The room-rendering function (abridged)</h3>
+<p>(To be called on collision.)</p>
+
+<figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">function renderRoom(room){
+</span><span class="line">    for(var row in room){
+</span><span class="line">        for(var column=0; column &lt;=  room[row].length; column++){
+</span><span class="line">            switch (room[row].charAt(column)){
+</span><span class="line">                case 'p':
+</span><span class="line">                    platform = platforms.create(column*32, row*32, 'platform-image');
+</span><span class="line">                    break;
+</span><span class="line">            }
+</span><span class="line">        }
+</span><span class="line">    }
+</span><span class="line">}</span></code></pre></td></tr></table></div></figure>
+<p>This room-rendering function currently only works with one level but should scale to accommodate multiple levels and work similarly if not identically.</p>
+
+<p>The room system works as detailed in pseudo-code below, with each “column” actually representing a single character in a string:</p>
+
+<figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">level1 [
+</span><span class="line">	room1 [ 
+</span><span class="line">		row1 'column1 column2 column3',
+</span><span class="line">		row2 'column1 column2 column3',
+</span><span class="line">		row3 'column1 column2 column3'
+</span><span class="line">	],
+</span><span class="line">	room2 [ 
+</span><span class="line">		row1 'column1 column2 column3',
+</span><span class="line">		row2 'column1 column2 column3',
+</span><span class="line">		row3 'column1 column2 column3'
+</span><span class="line">	]
+</span><span class="line">]</span></code></pre></td></tr></table></div></figure>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Chromebook Linux - From Crouton to GalliumOS]]></title>
+    <link href="http://mattconn.io/blog/2017/03/18/chromebook-linux/"/>
+    <updated>2017-03-18T00:00:00-04:00</updated>
+    <id>http://mattconn.io/blog/2017/03/18/chromebook-linux</id>
+    <content type="html"><![CDATA[<p>I love my Chromebook (as evidenced in <a href="http:///blog/2016/chromebook-web-development/">this</a> post); I bring it everywhere as it comes in handy for long commutes and, weighing in at around 3 pounds, isn’t the least bit cumbersome.</p>
+
+<p>However, the restrictions ChromeOS placed on me had been noticeable since the beginning; and I knew I would be restricted to Chrome Apps, extensions, and Play store applications, but didn’t count on how annoying this restriction would wind up being. Fortunately, there were workarounds.</p>
+
+<!--more-->
+
+<h2 id="crouton-an-early-solution">Crouton: An Early Solution</h2>
+<p><a href="https://github.com/dnschneid/crouton">Crouton</a> proved to be very easy to install and useful from the start. By creating a chroot and installing my distro of choice in it, I could run Ubuntu either by switching over to the chroot or accessing it from the Crosh command line.</p>
+
+<p>There was a problem, however; Ubuntu didn’t have the greatest driver support for my Chromebook’s trackpad and keyboard. So I found myself running Linux programs from the command line that ChromeOS typically wouldn’t allow (such as PHP, Python, and naturally, apt-get), but actually working in the ChromeOS environment, as it was just that much more supportive of the machine (Samsung Chromebook 3).</p>
+
+<p>But now if I wanted to play a game in an emulator such as Mupen64plus or WINE, I could not run that from the command line while in ChromeOS; it would throw an error in regards to X-server, forcing me to switch over to the chroot just for one program.</p>
+
+<h2 id="galliumos-my-current-and-best-so-far-solution">GalliumOS: My Current (And Best, So Far) Solution</h2>
+<p>Finally I thought I would consider <a href="https://galliumos.org/">GalliumOS</a>; a distro made specifically for Chromebooks. I made a ChromeOS recovery image and made a GalliumOS bootable USB and gave it a try.</p>
+
+<p>It worked nicely; it was a complete Linux environment that supported my machine’s brightness and volume keys, and with better “palm detection” (think Macbook trackpads and your resting thumb) out of the box without messing about with Synaptics.</p>
+
+<p>Initially, there was no sound support for my model. This stopped from installing it for a bit, but after trying a few other options, one including running a chroot off an SD card (for extra space for packages; it gets ejected when the machine sleeps unfortunately), I figured I’d deal with the sound issue. (At the time, the bug was that no internal sound was supported, but Bluetooth sound was.)</p>
+
+<p>After a full install, made easy thanks to GalliumOS’s excellent documentation, and then finally a GalliumOS update, to my surprise, internal audio worked, and so I’m now using my Chromebook as I please, with the ability to install my favorite programs such as Visual Studio Code (a program I wanted on my Chromebook from the very start), WINE, and all the rest; with that update came the patch that fixed my model’s sound issue.</p>
+
+<p>As I find myself installing and re-installing Linux pretty often, as with the example of setting up chroots mentioned earlier, I began tracking my environment’s packages, as well as Visual Studio Code extensions, which you can check out in a repository <a href="https://github.com/mattConn/ubuntu-environment-setup">here</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Parsing In-line PHP With Nginx]]></title>
+    <link href="http://mattconn.io/blog/2017/01/02/nginx-php-parsing-in-html/"/>
+    <updated>2017-01-02T00:00:00-05:00</updated>
+    <id>http://mattconn.io/blog/2017/01/02/nginx-php-parsing-in-html</id>
+    <content type="html"><![CDATA[<h3 id="my-environment">My Environment</h3>
+<ul>
+  <li>Nginx version
+    <ul>
+      <li>1.10.0</li>
+    </ul>
+  </li>
+  <li>PHP version
+    <ul>
+      <li>7.0</li>
+    </ul>
+  </li>
+  <li>FastCGI processor
+    <ul>
+      <li>php7.0-fpm</li>
+    </ul>
+  </li>
+  <li>Kernel
+    <ul>
+      <li>Ubuntu 16.04</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="the-first-and-more-obvious-step">The First And More Obvious Step</h2>
+
+<p>To enable parsing of PHP in HTML files, editing a server block’s location block to include files with an HTML extension should be sufficient.<br />
+<!--more-->
+For example:</p>
+
+<figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line"># /etc/nginx/sites-available/mywebsite.com
+</span><span class="line">location ~ \.(php|html)$ {
+</span><span class="line">        include snippets/fastcgi-php.conf;
+</span><span class="line">        fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+</span><span class="line">}</span></code></pre></td></tr></table></div></figure>
+
+<p>However, since I am working with PHP 7, whose full name is “php7.0” (which is usefully descriptive but makes things tricky when initially looking for related directories or daemons), I had an extra step in order to make this work. And apparently, all PHP versions, from late php5.* to php7.0, will require this extra step.</p>
+
+<h2 id="the-final-and-not-so-obvious-step">The Final And Not-So-Obvious Step</h2>
+
+<p>You’ll now have to edit <code>php-fpm.conf</code>, or preferrably one of its included files; namely, <code>www.conf</code>.<br />
+For me, <code>php-fpm.conf</code> lives at <code>/etc/php/7.0/</code>, with <code>www.conf</code> in directory <code>pool.d</code>.</p>
+
+<p>The line we are looking for in <code>www.conf</code> (or the line you can add to <code>php-fpm.conf</code> if you want) is <code>security.limit_extensions</code>, which, in conjunction with our Nginx configuration, will permit our specified file types to be parsed as PHP. You may have to uncomment it, and for me it read as such by default:</p>
+
+<p><code>security.limit_extensions = .php .php3 .php4 .php5 .php7</code></p>
+
+<p>Here we can add <code>.html</code> or <code>.htm</code>, or even <code>.js</code> (but then we’d have to add <code>.js</code> to our Nginx location block as we did with <code>.html</code> earlier).</p>
+
+<p>Finally, we must now restart the php-fpm daemon, and of course, our Nginx server, for all changes to take effect.</p>
+
+<p>For me, signaling Nginx to reload works:<br />
+<code>nginx -s reload</code><br />
+(You will need root permissions for this.)</p>
+
+<p>For php-fpm, I use the service wrapper:<br />
+<code>service php7.0-fpm restart</code><br />
+(Root permissions needed again.)</p>
+
+<p>Now you should be all set to write in-line PHP in HTML files, or even JavaScript files, if your heart so desires.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Chromebook Web Development]]></title>
+    <link href="http://mattconn.io/blog/2016/12/17/chromebook-web-development/"/>
+    <updated>2016-12-17T00:00:00-05:00</updated>
+    <id>http://mattconn.io/blog/2016/12/17/chromebook-web-development</id>
+    <content type="html"><![CDATA[<h2 id="quick-rundown">Quick Rundown</h2>
+<ul>
+  <li><strong>Machine:</strong>
+    <ul>
+      <li>Samsung Chromebook 3</li>
+    </ul>
+  </li>
+  <li><strong>Environment:</strong>
+    <ul>
+      <li>ChromeOS for a GUI and native drivers</li>
+      <li>Lubuntu for server-side programs and scripts (treated as headless)</li>
+    </ul>
+  </li>
+  <li><strong>Text Editor/IDE</strong>
+    <ul>
+      <li><a href="https://chrome.google.com/webstore/detail/caret-t/agiednhnlghobdgpgfdnbdaflnngmoij?hl=en">Caret-T</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>I recently purchased a Samsung Chromebook 3 so I could work on projects during my long commute or at my local coffee shop without worrying about losing or breaking my other more expensive portable machine. It’s really nice and light, and with a little configuration, makes for a great portable web development environemnt. After all, ChromeOS is itself a linux distro, but things are a little hidden in this environment as ChromeOS is meant to be easily accessible and to leave the user as little room as possible to screw things up.</p>
+
+<!--more-->
+
+<h2 id="first-enable-developer-mode">First, Enable Developer Mode</h2>
+<p><a href="http://www.howtogeek.com/210817/how-to-enable-developer-mode-on-your-chromebook/">Enabling developer mode</a> is very easy and necessary to get things started. This will allow you to access ChromeOS’s native shell, or “Crosh”, which runs in Chrome as an extension which is really cool; ctrl+alt+t will bring you there. From Crosh, we can then access our typical unix shell by simply typing “shell.”</p>
+
+<p>But now lets say we want another distro to run along side ChromeOS?</p>
+
+<h2 id="creating-a-chroot-for-running-another-distro">Creating A Chroot For Running Another Distro</h2>
+<p>A chroot, or change root, gives us the ability to run this second distro, without partitioning the disk or using a virtual machine, while still being able to access the same files across both environments. I installed LXDE because the Chromebook I purchased had only 2 gigs of RAM, and used <a href="https://github.com/dnschneid/crouton">Crouton</a> to create the chroot.</p>
+
+<p>This second distro is nice because if you are familiar with the Linux environment, you can proceed to work as you normally would, with Aptitude, Python, PHP and everyhing else already installed, and without all the limitations of ChromeOS.</p>
+
+<h2 id="chromeos-is-still-very-nice-and-an-integral-part-of-this-setup">ChromeOS Is Still Very Nice, And An Integral Part Of This Setup</h2>
+<p>ChromeOS makes for a very friendly desktop environment despite the red tape, and handles keyboard and trackpad input with its native drivers; I access the chroot via terminal to run scripts and install programs, but work with the ChromeOS GUI. For a text editor, I use <a href="https://chrome.google.com/webstore/detail/caret-t/agiednhnlghobdgpgfdnbdaflnngmoij?hl=en">Caret-T</a>, which is installed as a Chrome extension, and comes with intellisense-like auto-completion for JavaScript.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quick and Custom AddThis Setup]]></title>
+    <link href="http://mattconn.io/blog/2016/08/28/custom-addthis-setup/"/>
+    <updated>2016-08-28T00:00:00-04:00</updated>
+    <id>http://mattconn.io/blog/2016/08/28/custom-addthis-setup</id>
+    <content type="html"><![CDATA[<p>Getting AddThis sharing set up exactly how I wanted took some digging the first time around. Maybe, like me, you wanted AddThis’s functionality but with your own styles, and not the AddThis brand buttons. Here’s how I set it up, allowing for full customization.</p>
+
+<!--more-->
+
+<h2 id="considerations">Considerations</h2>
+
+<p>Before going further, here’s a short list of things to consider before working with AddThis:</p>
+
+<p>You should have included AddThis’s script before your document’s closing body tag.
+AddThis’s script will only work remotely; host locally or on a server.
+AddThis links will not work when certain adblock browser extensions are enabled; I’ve found adblock plus gave me no problems, but ublock origin did.</p>
+
+<h2 id="the-code-and-setup">The Code And Setup</h2>
+
+<h3 id="the-html">The HTML:</h3>
+
+<figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&lt;a class="sharing addthis_button_mailto"&gt;mailto&lt;/a&gt;
+</span><span class="line">&lt;a class="sharing addthis_button_email"&gt;email&lt;/a&gt;
+</span><span class="line">&lt;a class="sharing addthis_button_tumblr"&gt;tumblr&lt;/a&gt;
+</span><span class="line">&lt;a class="sharing addthis_button_google"&gt;google&lt;/a&gt;
+</span><span class="line">&lt;a class="sharing addthis_button_twitter"&gt;twitter&lt;/a&gt;
+</span><span class="line">&lt;a class="sharing addthis_button_facebook"&gt;facebook&lt;/a&gt;
+</span><span class="line">&lt;a class="sharing addthis_button_linkedin"&gt;linkedin&lt;/a&gt;</span></code></pre></td></tr></table></div></figure>
+
+<p>For the HTML, we use anchors each with a class that the AddThis scripts and stylesheets recognize, such as “addthis_button_facebook”. Sharing will be fully functional when clicking on an anchor with this class for the corresponding platform. Meaning, these classes are required, or at least in this setup.</p>
+
+<p>The first class of “sharing” is a custom one that I use to denote that these anchors are for AddThis functionality, and to be styled as such. The JavaScript will point to the “sharing” class as well, but these are not required.</p>
+
+<p>When you first create these anchors with the “addthis_button_socialplatform” class, AddThis will create a span as well that will contain a small image; I simply style that span with a “display: none”, and carry on with my own styles.</p>
+
+<h3 id="the-javascript">The JavaScript:</h3>
+
+<figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">var share = document.getElementsByClassName('sharing');
+</span><span class="line">for(var i=0; i&lt;share.length; i++){
+</span><span class="line">    share[i].setAttribute('addthis:url',document.URL);
+</span><span class="line">    share[i].setAttribute('addthis:title',document.title);
+</span><span class="line">    share[i].setAttribute('addthis:description','Check out my cool post!');
+</span><span class="line">}</span></code></pre></td></tr></table></div></figure>
+
+<p>For the JavaScript, we simply set the attributes of our AddThis anchors (all with the class of “sharing”) so that when sharing content, they automatically populate any text fields with the appropriate content. There’s no need to set an href, as the AddThis script will automatically set it equal to #.</p>
+
+<p>The AddThis anchor attributes are the following:</p>
+
+<p>addthis:url - field will be populated with this url. In this case, I set it equal to our document’s url, as I want the shared content to link back to my post or page. Of course, this url can be whatever you want.
+addthis:title - The title that will appear before the description in your shared content.
+addthis:description - this will be the copy that appears below the title in your shared content. This really only applies to platforms like Facebook and LinkedIn that allow for more copy when sharing. There won’t be any bugs when this attributed is applied to an anchor where not applicable (such as twitter); the description simply will not appear in that platform’s shared content, so there’s no need to worry about that.
+How you set any of these attributes is entirely up to you; I use JavaScript because I thought it was the easiest solution and I like JavaScript, but of course you could do it manually. Where you get your “addthis:description” is up to you as well; maybe an especially important paragraph’s innerHTML?</p>
+
+<h3 id="considerations-for-facebook-and-email">Considerations For Facebook And Email</h3>
+
+<p>Email (not mailto, but AddThis’s email sharing) and Facebook sharing stand out amongst all the other platforms here in that they both require a little extra.</p>
+
+<p>If you change the content you want to share to Facebook and it isn’t updating, you’ll want to paste the url of the page you’re sharing into Facebook’s sharing debugger.
+While mailto will open your device’s default mail client, then populate the subject based on the mailto attributes, “addthis_button_email” populates its fields based on the AddThis config variable (seen below).</p>
+
+<figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">var addthis_config = addthis_config||{};
+</span><span class="line">addthis_config.ui_email_to = 'recipient@email.com';
+</span><span class="line">addthis_config.ui_email_from = 'sender@email.com';
+</span><span class="line">addthis_config.ui_email_note = 'The copy that makes up the body of the email.';</span></code></pre></td></tr></table></div></figure>
+
+<p>Only one of these will work per page. Also, in case you’re familiar with the old AddThis email modal, I feel I should warn you that they’ve done away with that and instead AddThis email opens a new window.</p>
+
+<p>Alternatively, you could create an email template in your AddThis dashboard. I’ll admit AddThis has good documentation for this.</p>
+
+<p>Finally, you may want to “display: none” on “#at-cv-lightbox”; this modal can popup after first visit to a page using AddThis.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Animating With GreenSock]]></title>
+    <link href="http://mattconn.io/blog/2016/05/12/animating-with-greensock/"/>
+    <updated>2016-05-12T00:00:00-04:00</updated>
+    <id>http://mattconn.io/blog/2016/05/12/animating-with-greensock</id>
+    <content type="html"><![CDATA[<p><i>Originally written for <a href="https://thecharlesnyc.com/unordered-list/green-sock" target="_blank">The Charles NYC</a>.</i></p>
+
+<p>I’ve recently been introduced to animating with the powerful JavaScript library GreenSock. It’s quite impressive, notably for how manageable its animations are. Unlike CSS3, which measures its animations with percentages, GreenSock uses seconds for timing. GreenSock is also capable of applying multiple animations to a single element, each running either consecutively or simultaneously, which is something CSS3 is not capable of either.</p>
+
+<!--more-->
+
+<p>The real beauty of GreenSock is how much control it affords. Much like the animations they control, tweens (the animations between two keyframes) can be controlled with a timeline. This is essentially a container for tweens, and timelines themselves can be nested in other timelines, affording even more control.</p>
+
+<p>After building out a complex sequence of animations, you’ll find GreenSock’s afforded control becomes especially important when changing the animation or timing of your sequence. Whether it be within a single tween or an entire timeline, making changes is easy and painless, and will not affect adjacent animations.</p>
+
+<iframe height="265" scrolling="no" title="Greensock Pacman, Nested Timelines" src="//codepen.io/mattConn/embed/preview/aNZggN/?height=265&amp;theme-id=0&amp;default-tab=css,result&amp;embed-version=2" frameborder="no" allowtransparency="true" allowfullscreen="true" style="width: 100%;">See the Pen <a href="https://codepen.io/mattConn/pen/aNZggN/">Greensock Pacman, Nested Timelines</a> by Matthew Connelly (<a href="https://codepen.io/mattConn">@mattConn</a>) on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+<p>Using GreenSock, I made a brief animation (above) detailing the interaction between PacMan and a ghost. To create these two characters, I styled and positioned multiple divs, essentially “building” them. To make them “interact,” I placed all of their actions (tweens) into their own respective timelines in order to control the timing of each action.</p>
+
+<p>For example: to animate PacMan biting, there is a rotation tween on PacMan’s upper and lower jaw. These two tweens are both timed to occur simultaneously within a timeline. This timeline, containing all of Pacman’s animations, is then nested in my master timeline. This timeline is then timed to happen first, with my ghost’s timeline timed to happen shortly after.</p>
+
+<p>The learning curve for animating with GreenSock was relatively low with all the available resources online. GreenSock has their own active forum where often the creator of GreenSock himself answers questions in detail with code examples or an occasional proof of concept on Codepen. I’m excited to be working more in-depth with GreenSock in the future. In the absence of Flash, GreenSock seems to be the runner-up as the standard for creating engaging animations on the web.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Chromebook Linux - From Crouton to GalliumOS - MattConn.io</title>
+  <meta name="author" content="Matthew Connelly">
+
+  
+  <meta name="description" content="How I finally got to use my Chromebook as a full-featured Linux machine.">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mattconn.io/blog/2017/03/18/chromebook-linux/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="MattConn.io" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<!--highlight js-->
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow-night-bright.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<!--twitter card-->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@matterialDesign">
+
+  <meta name="twitter:title" content="Chromebook Linux - From Crouton to GalliumOS">
+
+
+  <meta name="twitter:description" content="How I finally got to use my Chromebook as a full-featured Linux machine.">
+
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-79240358-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+
+<!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']]
+  }
+});
+</script>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">MattConn.io</a></h1>
+  
+    <h2>Matthew Connelly's Developer Page</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="mattconn.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/assets/matthew-b-connelly-resume-2018.pdf">Resume</a></li>
+  <li><a href="https://github.com/mattConn/">GitHub</a></li>
+  <li><a href="https://www.linkedin.com/in/matconn/">LinkedIn</a></li>
+  <li><a href="https://twitter.com/MatterialDesign">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Chromebook Linux - From Crouton to GalliumOS</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-03-18T00:00:00-04:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I love my Chromebook (as evidenced in <a href="http:///blog/2016/chromebook-web-development/">this</a> post); I bring it everywhere as it comes in handy for long commutes and, weighing in at around 3 pounds, isn’t the least bit cumbersome.</p>
+
+<p>However, the restrictions ChromeOS placed on me had been noticeable since the beginning; and I knew I would be restricted to Chrome Apps, extensions, and Play store applications, but didn’t count on how annoying this restriction would wind up being. Fortunately, there were workarounds.</p>
+
+<!--more-->
+
+<h2 id="crouton-an-early-solution">Crouton: An Early Solution</h2>
+<p><a href="https://github.com/dnschneid/crouton">Crouton</a> proved to be very easy to install and useful from the start. By creating a chroot and installing my distro of choice in it, I could run Ubuntu either by switching over to the chroot or accessing it from the Crosh command line.</p>
+
+<p>There was a problem, however; Ubuntu didn’t have the greatest driver support for my Chromebook’s trackpad and keyboard. So I found myself running Linux programs from the command line that ChromeOS typically wouldn’t allow (such as PHP, Python, and naturally, apt-get), but actually working in the ChromeOS environment, as it was just that much more supportive of the machine (Samsung Chromebook 3).</p>
+
+<p>But now if I wanted to play a game in an emulator such as Mupen64plus or WINE, I could not run that from the command line while in ChromeOS; it would throw an error in regards to X-server, forcing me to switch over to the chroot just for one program.</p>
+
+<h2 id="galliumos-my-current-and-best-so-far-solution">GalliumOS: My Current (And Best, So Far) Solution</h2>
+<p>Finally I thought I would consider <a href="https://galliumos.org/">GalliumOS</a>; a distro made specifically for Chromebooks. I made a ChromeOS recovery image and made a GalliumOS bootable USB and gave it a try.</p>
+
+<p>It worked nicely; it was a complete Linux environment that supported my machine’s brightness and volume keys, and with better “palm detection” (think Macbook trackpads and your resting thumb) out of the box without messing about with Synaptics.</p>
+
+<p>Initially, there was no sound support for my model. This stopped from installing it for a bit, but after trying a few other options, one including running a chroot off an SD card (for extra space for packages; it gets ejected when the machine sleeps unfortunately), I figured I’d deal with the sound issue. (At the time, the bug was that no internal sound was supported, but Bluetooth sound was.)</p>
+
+<p>After a full install, made easy thanks to GalliumOS’s excellent documentation, and then finally a GalliumOS update, to my surprise, internal audio worked, and so I’m now using my Chromebook as I please, with the ability to install my favorite programs such as Visual Studio Code (a program I wanted on my Chromebook from the very start), WINE, and all the rest; with that update came the patch that fixed my model’s sound issue.</p>
+
+<p>As I find myself installing and re-installing Linux pretty often, as with the example of setting up chroots mentioned earlier, I began tracking my environment’s packages, as well as Visual Studio Code extensions, which you can check out in a repository <a href="https://github.com/mattConn/ubuntu-environment-setup">here</a>.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matthew Connelly</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2017-03-18T00:00:00-04:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>12:00 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://mattconn.io/blog/2017/03/18/chromebook-linux/" data-via="" data-counturl="http://mattconn.io/blog/2017/03/18/chromebook-linux/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2017/01/02/nginx-php-parsing-in-html/" title="Previous Post: Parsing In-line PHP With Nginx">&laquo; Parsing In-line PHP With Nginx</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2017/04/07/text-based-level-editing-phaser-js/" title="Next Post: Game Development - Text-based Level Editing and Phaser JS">Game Development - Text-based Level Editing and Phaser JS &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2018/05/31/your-name-as-a-number/">Your Name as a Number in Base-36 (Some Notes on Number Systems)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/05/01/pattern-in-quotients-of-seven-and-pi/">A Pattern in Quotients of Seven and Rational Pi</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/04/20/extra-steps-needed-for-setting-up-octopress-github-pages/">Extra Steps Needed for Setting Up Octopress With GitHub Pages</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/08/02/hosting-git-repos-with-a-web-frontend/">Hosting Git Repos With a Web Frontend</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/04/07/text-based-level-editing-phaser-js/">Game Development - Text-based Level Editing and Phaser JS</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/game-development'>game development (1)</a></li><li><a href='/blog/categories/linux'>linux (2)</a></li><li><a href='/blog/categories/mathematics'>mathematics (2)</a></li><li><a href='/blog/categories/web-development'>web development (7)</a></li></ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - Matthew Connelly -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'mattconn-1';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://mattconn.io/blog/2017/03/18/chromebook-linux/';
+        var disqus_url = 'http://mattconn.io/blog/2017/03/18/chromebook-linux/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
