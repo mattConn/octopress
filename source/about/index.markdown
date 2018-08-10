@@ -15,4 +15,4 @@ This website serves mainly as a blog where I write about projects I've been work
 
 Contact: <a href="mailto:matthew.b.connelly@gmail.com">matthew.b.connelly@gmail.com</a>
 
-Source code for this website [here](https://github.com/mattConn/mattconn.github.io/).
+Source code for this website [here](https://github.com/mattConn/mattconn.github.io/tree/source).
