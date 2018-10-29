@@ -1,0 +1,147 @@
+% LaTeX Curriculum Vitae Template
+%
+% Copyright (C) 2004-2009 Jason Blevins <jrblevin@sdf.lonestar.org>
+% http://jblevins.org/projects/cv-template/
+%
+% You may use use this document as a template to create your own CV
+% and you may redistribute the source code freely. No attribution is
+% required in any resulting documents. I do ask that you please leave
+% this notice and the above URL in the source code if you choose to
+% redistribute this file.
+
+\documentclass[letterpaper]{article}
+
+\usepackage{hyperref}
+\usepackage{geometry}
+
+% Comment the following lines to use the default Computer Modern font
+% instead of the Palatino font provided by the mathpazo package.
+% Remove the 'osf' bit if you don't like the old style figures.
+\usepackage[T1]{fontenc}
+\usepackage[sc,osf]{mathpazo}
+
+% Set your name here
+\def\name{Matthew B. Connelly}
+
+% Replace this with a link to your CV if you like, or set it empty
+% (as in \def\footerlink{}) to remove the link in the footer:
+\def\footerlink{}
+
+% The following metadata will show up in the PDF properties
+\hypersetup{
+  colorlinks = true,
+  urlcolor = black,
+  pdfauthor = {\name},
+  pdfkeywords = {economics, statistics, mathematics},
+  pdftitle = {\name: Resume},
+  pdfsubject = {Resume},
+  pdfpagemode = UseNone
+}
+
+\geometry{
+  body={6.5in, 8.5in},
+  left=1.0in,
+  top=1.25in
+}
+
+% Customize page headers
+\pagestyle{myheadings}
+\markright{\name}
+\thispagestyle{empty}
+
+% Custom section fonts
+\usepackage{sectsty}
+\sectionfont{\rmfamily\mdseries\Large}
+\subsectionfont{\rmfamily\mdseries\itshape\large}
+
+% Other possible font commands include:
+% \ttfamily for teletype,
+% \sffamily for sans serif,
+% \bfseries for bold,
+% \scshape for small caps,
+% \normalsize, \large, \Large, \LARGE sizes.
+
+% Don't indent paragraphs.
+\setlength\parindent{0em}
+
+% Make lists without bullets
+\renewenvironment{itemize}{
+  \begin{list}{}{
+    \setlength{\leftmargin}{1.5em}
+  }
+}{
+  \end{list}
+}
+
+\begin{document}
+
+% Place name at left
+% {\huge \name}
+
+% Alternatively, print name centered and bold:
+\centerline{\huge \name}
+
+\vspace{0.25in}
+
+\section*{Education}
+
+\begin{itemize}
+  \item The City University of New York, College of Staten Island, Staten Island, NY
+
+  Bachelor of Science in Computer Science-Mathematics
+
+  Expected graduation: Spring 2020
+
+  \
+
+  \item The City University of New York, College of Staten Island, Staten Island, NY
+
+  Bachelor of Science in Communications: Concentration in Digital Design
+
+  Graduated Spring 2016
+\end{itemize}
+
+
+\section*{Employment}
+
+\begin{itemize}
+\item Web Developer
+
+The Charles NYC
+
+January 2016 - March 2017\\\\
+Responsibilities:
+  \begin{itemize}
+    \item \textperiodcentered \ Website development for client projects with client-facing CMS
+    \item \textperiodcentered \ Developed with JavaScript, HTML5, and CSS3 to create feature-rich, mobile-first websites
+    \item \textperiodcentered \ Implemented frameworks and libraries such as GreenSock, jQuery, and ScrollMagic
+    \item \textperiodcentered \ Used Gulp for task-automation, as well as pre-processors such as Jade and SASS
+	\item \textperiodcentered \ Server-side configuration (database migration, Nginx configuration)
+  \end{itemize}
+\end{itemize}
+
+\section*{Projects}
+
+\begin{itemize}
+  \item Independent Study - Differential and Hyperbolic Geometry
+  
+  The City University of New York, College of Staten Island, Staten Island, NY
+  
+  August 2018 - Present
+
+  \begin{itemize}
+    \item \textperiodcentered \ Visualizing surfaces and curves with Julia code and other programs (Geogebra, Blender)
+	\item \textperiodcentered \ Finding solutions to mathematical problems in Andrew Pressley's \emph{Elementary Differential Geometry}; presenting solutions with diagrams in weekly report typed in LaTex
+
+  \end{itemize}
+\end{itemize}
+
+\section*{Skills}
+\begin{itemize}
+  \item \textperiodcentered \ C/C++, JavaScript, Python, Julia, CSS3, HTML5
+  \item \textperiodcentered \ Operating systems: Ubuntu, MacOS, Debian, Windows
+\end{itemize}
+
+\bigskip
+
+\end{document}
